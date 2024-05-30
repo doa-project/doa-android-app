@@ -1,7 +1,8 @@
-package com.example.doa_app
+package com.example.doa_app.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.doa_app.R
 import com.example.doa_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
