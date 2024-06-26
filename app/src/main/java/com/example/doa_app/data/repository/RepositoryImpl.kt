@@ -7,6 +7,9 @@ import com.example.doa_app.data.model.Publication
 import com.example.doa_app.data.model.User
 import com.example.doa_app.domain.repository.Repository
 import retrofit2.Response
+//Essa classe representa a camada de comunicação da coleta de dados com a lógica de negócio.
+// Ela implementa a interface Repository, garantindo a segurança sobre as operações aplicadas nos dados
+
 
 class RepositoryImpl(private val service: Service): Repository {
     override suspend fun getAllCampaign(): Response<List<Campaign>> {

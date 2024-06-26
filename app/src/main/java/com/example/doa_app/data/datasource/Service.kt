@@ -12,6 +12,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
+//Classe que representa a camada de comunicação com a API
 interface Service{
     //USER CRUD
     @POST("user/create/")
