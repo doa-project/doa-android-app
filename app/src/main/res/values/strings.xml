@@ -1,4 +1,9 @@
 <resources>
+    <!--Application Name-->
     <string name="app_name">doa</string>
-    <string name="login"><u>Login</u></string>
+    <!--Login Activity-->
+    <string name="bem_vindo_ao_doa">Bem vindo ao Doa</string>
+    <string name="login_forms">login</string>
+    <string name="senha">Senha</string>
+    <string name="email">Email</string>
 </resources>

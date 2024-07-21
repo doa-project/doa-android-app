@@ -7,7 +7,7 @@
     tools:context=".presentation.ui.activity.LoginActivity">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/doa_logo"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="140dp"
@@ -17,19 +17,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/title_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/publicsans_bold"
-        android:text="Bem vindo ao Doa"
+        android:text="@string/bem_vindo_ao_doa"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/doa_logo" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/email_forms"
         android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
@@ -38,12 +38,14 @@
         android:fontFamily="@font/publicsans_regular"
         android:inputType="text"
         android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/title_welcome"
+        tools:ignore="RtlSymmetry,TextFields" />
 
     <EditText
-        android:id="@+id/senha"
+        android:id="@+id/password_forms"
         android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
@@ -52,42 +54,43 @@
         android:fontFamily="@font/publicsans_regular"
         android:inputType="text"
         android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/email_forms" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/email_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/publicsans_regular"
-        android:text="Email"
+        android:text="@string/email"
         android:textColor="@color/grey_text_not_emphasis"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintStart_toStartOf="@+id/email" />
+        app:layout_constraintBottom_toTopOf="@+id/email_forms"
+        app:layout_constraintStart_toStartOf="@+id/email_forms" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/senha_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/publicsans_regular"
-        android:text="Senha"
+        android:text="@string/senha"
         android:textColor="@color/grey_text_not_emphasis"
-        app:layout_constraintBottom_toTopOf="@+id/senha"
-        app:layout_constraintStart_toStartOf="@+id/senha" />
+        app:layout_constraintBottom_toTopOf="@+id/password_forms"
+        app:layout_constraintStart_toStartOf="@+id/password_forms" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="180dp"
         android:background="@drawable/button_simple"
         android:fontFamily="@font/publicsans_semibold"
-        android:text="login"
+        android:text="@string/login_forms"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/senha" />
+        app:layout_constraintTop_toBottomOf="@+id/password_forms" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
