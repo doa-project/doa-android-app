@@ -2,6 +2,7 @@ package com.example.doa_app.data.datasource
 
 import com.example.doa_app.data.model.Campaign
 import com.example.doa_app.data.model.Institution
+import com.example.doa_app.data.model.Login
 import com.example.doa_app.data.model.Publication
 import com.example.doa_app.data.model.User
 import retrofit2.Response
@@ -21,6 +22,10 @@ interface Service{
     suspend fun updateUser(@Path("id") id: String, @Body user: User): Response<User>
     @DELETE("user/delete/{id}")
     suspend fun deleteUser(@Path("id") id: String): Response<User>
+
+    //LOGIN
+    @POST("user/login/")
+    suspend fun login(@Body login: Login): Response<User>
 
     //INSTITUTION CRUD
     @POST("institution/create/")

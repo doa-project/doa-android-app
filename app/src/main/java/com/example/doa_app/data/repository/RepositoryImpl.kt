@@ -3,6 +3,7 @@ package com.example.doa_app.data.repository
 import com.example.doa_app.data.datasource.Service
 import com.example.doa_app.data.model.Campaign
 import com.example.doa_app.data.model.Institution
+import com.example.doa_app.data.model.Login
 import com.example.doa_app.data.model.Publication
 import com.example.doa_app.data.model.User
 import com.example.doa_app.domain.repository.Repository
@@ -46,6 +47,10 @@ class RepositoryImpl(private val service: Service): Repository {
 
     override suspend fun deleteUser(id: String): Response<User> {
         return service.deleteUser(id)
+    }
+
+    override suspend fun login(login: Login): Response<User> {
+        return service.login(login)
     }
 
     override suspend fun createInstitution(institution: Institution): Response<Institution> {

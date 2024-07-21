@@ -2,6 +2,7 @@ package com.example.doa_app.domain.repository
 
 import com.example.doa_app.data.model.Campaign
 import com.example.doa_app.data.model.Institution
+import com.example.doa_app.data.model.Login
 import com.example.doa_app.data.model.Publication
 import com.example.doa_app.data.model.User
 import retrofit2.Response
@@ -23,6 +24,7 @@ interface Repository {
     suspend fun createUser(user: User): Response<User>
     suspend fun updateUser(id: String, user: User): Response<User>
     suspend fun deleteUser(id: String): Response<User>
+    suspend fun login(login: Login): Response<User>
 
     //Methods for CRUD of Institution
     suspend fun createInstitution(institution: Institution): Response<Institution>
