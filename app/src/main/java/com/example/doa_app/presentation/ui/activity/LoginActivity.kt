@@ -31,13 +31,13 @@ class LoginActivity : AppCompatActivity() {
             modules(appModule)
         }
 
-        binding.button.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     UserUseCase(retrofitRepository).login(
                         Login(
-                            email = binding.email.text.toString(),
-                            password = binding.senha.text.toString()
+                            email = binding.emailForms.text.toString(),
+                            password = binding.passwordForms.text.toString()
                         )
                     )
                 } catch (e: IllegalAccessException) {
