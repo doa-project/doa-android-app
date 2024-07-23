@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.activity.home">
+    tools:context=".presentation.ui.activity.HomeUserActivity">
 
     <LinearLayout
         android:id="@+id/header"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/bt_home"
+            android:id="@+id/bt_home_logo"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -31,7 +31,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
-        android:name="com.example.doa_app.presentation.ui.activity.fragments.fragment_home"
+        android:name="com.example.doa_app.presentation.ui.activity.fragments.HomeUserFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/footer"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/bt_home2"
+            android:id="@+id/bt_home"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
