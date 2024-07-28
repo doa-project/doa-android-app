@@ -9,22 +9,9 @@ val appModule = module {
     // Provide Retrofit instance
     single<Service> {
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl("https://api.url.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(Service::class.java)
     }
-
-    // Provide Repository
-//    single<PostsRepository> { PostsRepositoryImpl(get()) }
-//
-//    // Provide Use Case
-//    single { GetAllPostsUseCase(get()) }
-//    single { GetPostUseCase(get()) }
-//    single { CreatePostUseCase(get()) }
-//    single { UpdatePostUseCase(get()) }
-//    single { PatchPostUseCase(get()) }
-//    single { DeletePostUseCase(get()) }
-
-    // Provide ViewModel
 }

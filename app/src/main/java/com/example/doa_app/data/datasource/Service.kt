@@ -34,6 +34,8 @@ interface Service{
     suspend fun updateInstitution(@Path("id") id: String, @Body institution: Institution): Response<Institution>
     @DELETE("institution/delete/{id}")
     suspend fun deleteInstitution(@Path("id") id: String): Response<Institution>
+    @GET("institution/get/{id}")
+    suspend fun getInstitution(@Path("id") id: String): Response<Institution>
 
     //CAMPAIN CRUD
     @POST("campain/create/")

@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Doaapp">
         <activity
+            android:name=".presentation.ui.activity.fragments.AddCampaignFragment"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.activity.fragments.UserFragment"
             android:exported="false" />
         <activity
@@ -21,8 +24,7 @@
         <activity
             android:name=".presentation.ui.activity.fragments.HomeUserFragment"
             android:exported="false" />
-        <activity
-            android:name=".presentation.ui.activity.HomeUserActivity"/>
+        <activity android:name=".presentation.ui.activity.HomeUserActivity" />
         <activity
             android:name=".presentation.ui.activity.LoginActivity"
             android:exported="true">

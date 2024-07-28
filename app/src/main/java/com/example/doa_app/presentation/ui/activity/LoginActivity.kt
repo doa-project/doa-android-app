@@ -10,8 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import com.example.doa_app.RetrofitInstance
 import com.example.doa_app.appModule
 import com.example.doa_app.data.model.Login
-import com.example.doa_app.data.repository.RepositoryImpl
+import com.example.doa_app.data.repository.CommonLoginRepositoryImpl
 import com.example.doa_app.databinding.ActivityLoginBinding
+import com.example.doa_app.domain.repository.CommonLoginRepository
+import com.example.doa_app.domain.usecase.CommonLoginUseCase
 import com.example.doa_app.domain.usecase.UserUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext
@@ -20,7 +22,7 @@ import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val retrofitRepository = RepositoryImpl(RetrofitInstance.service)
+    private val commonLoginRepository = CommonLoginRepositoryImpl(RetrofitInstance.service)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -34,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    UserUseCase(retrofitRepository).login(
+                    CommonLoginUseCase(commonLoginRepository).login(
                         Login(
                             email = binding.emailForms.text.toString(),
                             password = binding.passwordForms.text.toString()

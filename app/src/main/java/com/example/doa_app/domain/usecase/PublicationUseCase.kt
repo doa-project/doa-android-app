@@ -1,11 +1,11 @@
 package com.example.doa_app.domain.usecase
 
 import com.example.doa_app.data.model.Publication
-import com.example.doa_app.domain.repository.Repository
+import com.example.doa_app.domain.repository.PublicationRepository
 import retrofit2.Response
 
 class PublicationUseCase(
-    private val repository: Repository
+    private val repository: PublicationRepository
 ) {
     suspend fun getAllPublications(): Response<List<Publication>> = repository.getAllPublications()
 
