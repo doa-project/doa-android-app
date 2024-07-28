@@ -26,11 +26,6 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
         bt_add_publication = findViewById(R.id.bt_add_publication)
         bt_user = findViewById(R.id.bt_user)
 
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            add<HomeUserFragment>(R.id.fragment)
-        }
-
         addClick()
     }
 
@@ -47,7 +42,7 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
                 replace<HomeUserFragment>(R.id.fragment)
             }
         }
-        bt_add_publication.setOnClickListener() {
+        bt_add_publication.setOnClickListener {
             bt_add_publication.setImageResource(R.drawable.add_publication_selected);
             bt_home.setImageResource(R.drawable.home_icon);
             bt_user.setImageResource(R.drawable.user_circle);
@@ -58,7 +53,7 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
                 replace<AddPublicationFragment>(R.id.fragment)
             }
         }
-        bt_user.setOnClickListener() {
+        bt_user.setOnClickListener {
             bt_user.setImageResource(R.drawable.user_circle_selected);
             bt_add_publication.setImageResource(R.drawable.add_publication);
             bt_home.setImageResource(R.drawable.home_icon);
