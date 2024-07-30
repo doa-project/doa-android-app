@@ -21,7 +21,7 @@ class ListImagesAdapter : RecyclerView.Adapter<ListImagesAdapter.ListImageViewHo
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
-    private var imagesList: List<Image>
+    var imagesList: List<Image>
         get() = differ.currentList
         set(value) { differ.submitList(value) }
 

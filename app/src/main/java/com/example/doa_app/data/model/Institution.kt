@@ -1,5 +1,6 @@
 package com.example.doa_app.data.model
 
+import android.graphics.Bitmap
 import android.util.Base64
 
 data class Institution(
@@ -9,5 +10,5 @@ data class Institution(
     val description: String,
     val local: String,
     val phone: String,
-    val photo: Base64
+    val photo: Bitmap
 )
