@@ -7,7 +7,7 @@ import com.example.doa_app.domain.repository.CommonLoginRepository
 import retrofit2.Response
 
 class CommonLoginRepositoryImpl(private val service: Service): CommonLoginRepository {
-    override suspend fun login(login: Login): Response<User> {
+    override suspend fun login(login: Login): Response<Any> {
         return service.login(login)
     }
 }

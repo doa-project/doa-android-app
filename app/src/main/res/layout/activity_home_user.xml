@@ -57,13 +57,13 @@
             app:srcCompat="@drawable/home_icon_selected" />
 
         <ImageButton
-            android:id="@+id/bt_add_publication"
+            android:id="@+id/bt_view_campaign"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@drawable/background_header"
-            android:contentDescription="bt_add_publication"
-            app:srcCompat="@drawable/add_publication" />
+            android:contentDescription="bt_view_campaign"
+            app:srcCompat="@drawable/donationicon" />
 
         <ImageButton
             android:id="@+id/bt_user"
@@ -74,4 +74,5 @@
             android:contentDescription="bt_user"
             app:srcCompat="@drawable/user_circle" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,5 +5,5 @@ import com.example.doa_app.data.model.User
 import retrofit2.Response
 
 interface CommonLoginRepository {
-    suspend fun login(login: Login): Response<User>
+    suspend fun login(login: Login): Response<Any>
 }

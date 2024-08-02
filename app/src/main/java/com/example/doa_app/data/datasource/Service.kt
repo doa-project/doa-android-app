@@ -25,7 +25,7 @@ interface Service{
 
     //LOGIN
     @POST("user/login/")
-    suspend fun login(@Body login: Login): Response<User>
+    suspend fun login(@Body login: Login): Response<Any>
 
     //INSTITUTION CRUD
     @POST("institution/create/")
