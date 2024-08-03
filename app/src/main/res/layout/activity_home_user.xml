@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.activity.HomeUserActivity">
+    tools:context=".presentation.ui.activity.HomeUserActivity"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/header"
@@ -26,7 +27,7 @@
             android:background="@drawable/background_header"
             android:contentDescription="bt_home"
             android:scaleType="fitStart"
-            app:srcCompat="@drawable/doa_logo_header" />
+            app:srcCompat="@drawable/doalogonobg" />
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -54,7 +55,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_header"
             android:contentDescription="bt_home2"
-            app:srcCompat="@drawable/home_icon_selected" />
+            app:srcCompat="@drawable/ihomes" />
 
         <ImageButton
             android:id="@+id/bt_view_campaign"
@@ -63,7 +64,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_header"
             android:contentDescription="bt_view_campaign"
-            app:srcCompat="@drawable/donationicon" />
+            app:srcCompat="@drawable/icampaignn" />
 
         <ImageButton
             android:id="@+id/bt_user"
@@ -72,7 +73,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_header"
             android:contentDescription="bt_user"
-            app:srcCompat="@drawable/user_circle" />
+            app:srcCompat="@drawable/iprofilen" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

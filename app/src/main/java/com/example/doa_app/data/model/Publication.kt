@@ -9,5 +9,5 @@ data class Publication(
     val institutionName: String?,
     val institutionPhoto: Bitmap?,
     val description: String,
-    val images: List<Image>?,
+    val images: MutableList<Image>?,
 )

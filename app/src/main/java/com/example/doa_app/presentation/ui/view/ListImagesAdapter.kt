@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doa_app.data.model.Image
 import com.example.doa_app.databinding.ImageRecycleItemBinding
+import com.example.doa_app.utils.ImageUtils
 
 class ListImagesAdapter : RecyclerView.Adapter<ListImagesAdapter.ListImageViewHolder>() {
+    private val imageUtils = ImageUtils()
     inner class ListImageViewHolder(val binding: ImageRecycleItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val diffCallback = object : DiffUtil.ItemCallback<Image>() {
@@ -21,7 +23,7 @@ class ListImagesAdapter : RecyclerView.Adapter<ListImagesAdapter.ListImageViewHo
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
-    var imagesList: List<Image>
+    var imagesList: MutableList<Image>
         get() = differ.currentList
         set(value) { differ.submitList(value) }
 
@@ -37,7 +39,7 @@ class ListImagesAdapter : RecyclerView.Adapter<ListImagesAdapter.ListImageViewHo
     override fun onBindViewHolder(holder: ListImageViewHolder, position: Int) {
         holder.binding.apply {
             val images = imagesList[position]
-            image.setImageBitmap(images.image)
+            image.setImageBitmap(imageUtils.base64ToBitmap(images.image))
         }
     }
 }

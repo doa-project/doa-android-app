@@ -9,7 +9,7 @@ data class Campaign(
     val institutionName: String?,
     val institutionPhoto: Bitmap?,
     val description: String,
-    val images: List<Image>,
+    val images: MutableList<Image>,
     val endDate: String,
     val local: String
 )

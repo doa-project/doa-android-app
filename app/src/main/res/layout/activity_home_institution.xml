@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.activity.HomeInstitutionActivity">
+    tools:context=".presentation.ui.activity.HomeInstitutionActivity"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/header"
@@ -26,7 +27,7 @@
             android:background="@drawable/background_header"
             android:contentDescription="bt_home"
             android:scaleType="fitStart"
-            app:srcCompat="@drawable/doa_logo_header" />
+            app:srcCompat="@drawable/doalogonobg" />
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -35,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header" />
 
@@ -45,6 +47,7 @@
         android:orientation="horizontal"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
@@ -54,7 +57,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_header"
             android:contentDescription="bt_home2"
-            app:srcCompat="@drawable/home_icon_selected" />
+            app:srcCompat="@drawable/ihomes" />
 
         <ImageButton
             android:id="@+id/bt_add_publication"
@@ -63,7 +66,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_header"
             android:contentDescription="bt_add_publication"
-            app:srcCompat="@drawable/add_publication" />
+            app:srcCompat="@drawable/icreaten" />
 
         <ImageButton
             android:id="@+id/bt_user"
@@ -72,6 +75,6 @@
             android:layout_weight="1"
             android:background="@drawable/background_header"
             android:contentDescription="bt_user"
-            app:srcCompat="@drawable/user_circle" />
+            app:srcCompat="@drawable/iprofilen" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

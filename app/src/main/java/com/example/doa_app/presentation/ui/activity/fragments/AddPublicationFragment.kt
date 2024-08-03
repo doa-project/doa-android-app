@@ -1,9 +1,14 @@
 package com.example.doa_app.presentation.ui.activity.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +26,7 @@ import com.example.doa_app.domain.usecase.CampaignUseCase
 import com.example.doa_app.domain.usecase.PublicationUseCase
 import com.example.doa_app.presentation.ui.view.ListImagesAdapter
 import com.example.doa_app.presentation.ui.view.SpacingOnSide
+import com.example.doa_app.utils.ImageUtils
 import kotlinx.coroutines.launch
 
 class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publication) {
@@ -31,12 +37,11 @@ class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publicati
 
     private var institutionId = ""
 
-    private var listOfImages = mutableListOf<Image>()
     private var listImageAdapter: ListImagesAdapter? = null
     private var campaignUseCase = CampaignUseCase(CampaignRepositoryImpl(RetrofitInstance.service))
     private var publicationUseCase = PublicationUseCase(PublicationRepositoryImpl(RetrofitInstance.service))
-
-
+    private val imageUtils = ImageUtils()
+    private val selectedImages = mutableListOf<Image>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,7 +70,8 @@ class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publicati
         binding.listImageRecycleView.layoutManager = gridLayoutManager
 
         binding.galeryButton.setOnClickListener {
-            //Entrar na galeria
+            selectedImages.clear()
+            openGallery()
         }
 
         binding.campaignButton.setOnClickListener {
@@ -95,7 +101,7 @@ class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publicati
                 val date = binding.editTextDate.text.toString()
 
                 if (description.isNotEmpty() && address.isNotEmpty() && date.isNotEmpty()) {
-                    val campaign = Campaign(null, institutionId, null, null, description, listOfImages, date, address)
+                    val campaign = Campaign(null, institutionId, null, null, description, selectedImages, date, address)
                     lifecycleScope.launch {
                         campaignUseCase.createCampaign(campaign)
                     }
@@ -111,7 +117,7 @@ class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publicati
                 val description = binding.editTextTextMultiLine.text.toString()
 
                 if (description.isNotEmpty()) {
-                    val publication = Publication(null, institutionId, null, null, description, listOfImages)
+                    val publication = Publication(null, institutionId, null, null, description, selectedImages)
                     lifecycleScope.launch {
                         publicationUseCase.createPublication(publication)
                     }
@@ -122,9 +128,44 @@ class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publicati
             }
         }
     }
+    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            selectedImages.clear()
+            result.data?.clipData?.let { clipData ->
+                for (i in 0 until clipData.itemCount) {
+                    if (i < 5) {
+                        val imageUri = clipData.getItemAt(i).uri
+                        val bitmap = imageUtils.getRotatedBitmap(requireContext(), imageUri)
+                        val base64Image = imageUtils.bitmapToBase64(bitmap)
+                        selectedImages.add(Image(id = "image_$i", image =  base64Image))
+                    } else {
+                        Toast.makeText(requireContext(), "Limite de 5 imagens", Toast.LENGTH_SHORT).show()
+                        break
+                    }
+                }
+            } ?: run {
+                result.data?.data?.let { uri ->
+                    val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+                    val base64Image = imageUtils.bitmapToBase64(bitmap)
+                    selectedImages.add(Image(id = "image_0", image = base64Image))
+                }
+            }
+            setupRecyclerView()
+        }else{
+            Toast.makeText(requireContext(), "Nenhuma imagem selecionada", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        }
+        galleryLauncher.launch(intent)
+    }
 
     private fun setupRecyclerView() = binding.listImageRecycleView.apply {
         listImageAdapter = ListImagesAdapter()
+        listImageAdapter!!.imagesList = selectedImages
         adapter = listImageAdapter
         addItemDecoration(SpacingOnSide(resources.getDimension(R.dimen.recycler_view_item_space).toInt()))
         layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)

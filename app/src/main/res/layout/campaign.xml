@@ -28,7 +28,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/heart_campain"
+                android:src="@drawable/iheartcampain"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.95"
@@ -91,7 +91,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description"
-            app:srcCompat="@drawable/local_icon" />
+            app:srcCompat="@drawable/ilocal" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -101,7 +101,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:srcCompat="@drawable/clock_icon" />
+            app:srcCompat="@drawable/iclock" />
 
         <TextView
             android:id="@+id/local"

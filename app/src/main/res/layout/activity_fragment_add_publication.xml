@@ -4,118 +4,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.activity.fragments.AddPublicationFragment">
+    tools:context=".presentation.ui.activity.fragments.AddPublicationFragment"
+    android:background="@color/white">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listImageRecycleView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="16dp"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/publishButton" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="360dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:height="40dp"
-        android:background="@drawable/forms_simple"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:maxLength="50"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:padding="16dp"
-        android:textColor="@color/black_text_emphasis"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/publicationButton" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/publicationButton"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/button_simple"
-        android:fontFamily="@font/publicsans_semibold"
-        android:text="publicação"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listImageRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/publishButton" />
 
-    <Button
-        android:id="@+id/campaignButton"
-        android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/red_stroke"
-        android:text="campanha"
-        android:textAllCaps="false"
-        android:textColor="@color/red_principal"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/editTextTextMultiLine"
+                android:layout_width="360dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:height="40dp"
+                android:background="@drawable/forms_simple"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/o_que_voc_quer_contar_ao_mundo"
+                android:inputType="textMultiLine"
+                android:maxLength="50"
+                android:padding="16dp"
+                android:textColor="@color/grey_text"
+                android:textColorHint="@color/grey_disabled"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/publicationButton" />
 
-    <ImageButton
-        android:id="@+id/galeryButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/galery_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressInputText" />
+            <Button
+                android:id="@+id/publicationButton"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/button_simple"
+                android:fontFamily="@font/publicsans_semibold"
+                android:text="publicação"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/publishButton"
-        android:layout_width="360dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/button_simple"
-        android:fontFamily="@font/publicsans_semibold"
-        android:text="Publicar"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/galeryButton" />
+            <Button
+                android:id="@+id/campaignButton"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/red_stroke"
+                android:text="campanha"
+                android:textAllCaps="false"
+                android:textColor="@color/red_principal"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="280dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/forms_simple"
-        android:ems="10"
-        android:inputType="datetime"
-        app:layout_constraintEnd_toEndOf="@+id/addressInputText"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/galeryButton"
-        app:layout_constraintTop_toBottomOf="@+id/addressInputText" />
+            <ImageButton
+                android:id="@+id/galeryButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_header"
+                android:src="@drawable/igalery"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressInputText" />
 
-    <EditText
-        android:id="@+id/addressInputText"
-        android:layout_width="360dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/forms_simple"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+            <Button
+                android:id="@+id/publishButton"
+                android:layout_width="360dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/button_simple"
+                android:fontFamily="@font/publicsans_semibold"
+                android:text="Publicar"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/galeryButton" />
 
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/forms_simple"
+                android:ems="10"
+                android:hint="@string/quando_vai_acontecer"
+                android:inputType="text"
+                android:padding="8dp"
+                android:paddingStart="16dp"
+                android:textColorHint="@color/grey_disabled"
+                android:textColor="@color/grey_text"
+                app:layout_constraintEnd_toEndOf="@+id/addressInputText"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/galeryButton"
+                app:layout_constraintTop_toBottomOf="@+id/addressInputText" />
+
+            <EditText
+                android:id="@+id/addressInputText"
+                android:layout_width="360dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/forms_simple"
+                android:ems="10"
+                android:hint="@string/qual_o_endere_o"
+                android:inputType="text"
+                android:padding="8dp"
+                android:paddingStart="16dp"
+                android:textColorHint="@color/grey_disabled"
+                android:textColor="@color/grey_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
