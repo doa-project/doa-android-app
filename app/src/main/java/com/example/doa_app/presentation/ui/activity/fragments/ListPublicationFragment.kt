@@ -2,6 +2,7 @@ package com.example.doa_app.presentation.ui.activity.fragments
 
 import android.content.ContentValues
 import android.content.Intent
+import android.net.http.HttpException
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,27 +14,27 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doa_app.R
 import com.example.doa_app.RetrofitInstance
-import com.example.doa_app.data.model.Campaign
-import com.example.doa_app.data.repository.CampaignRepositoryImpl
-import com.example.doa_app.databinding.FragmentListCampaignBinding
-import com.example.doa_app.domain.usecase.CampaignUseCase
-import com.example.doa_app.presentation.ui.view.ListCampaignAdapter
-import com.example.doa_app.presentation.ui.view.OnCampaignClickListener
+import com.example.doa_app.data.model.Publication
+import com.example.doa_app.data.repository.PublicationRepositoryImpl
+import com.example.doa_app.databinding.FragmentListPublicationBinding
+import com.example.doa_app.domain.usecase.PublicationUseCase
+import com.example.doa_app.presentation.ui.view.ListPublicationsAdapter
+import com.example.doa_app.presentation.ui.view.OnPublicationClickListener
 import com.example.doa_app.presentation.ui.view.SpacingOnSide
-import retrofit2.HttpException
 import java.io.IOException
 
-class ListCampaignFragment : Fragment(R.layout.fragment_list_campaign), OnCampaignClickListener {
-    private var _binding: FragmentListCampaignBinding? = null
+class ListPublicationFragment : Fragment(R.layout.fragment_list_publication),
+    OnPublicationClickListener {
+    private var _binding: FragmentListPublicationBinding? = null
     private val binding get() = _binding!!
-    private var listCampaignAdapter: ListCampaignAdapter? = null
-    private lateinit var campaignList: MutableList<Campaign>
-    private val campaignUseCase = CampaignUseCase(CampaignRepositoryImpl(RetrofitInstance.service))
+    private var listPublicationAdapter: ListPublicationsAdapter? = null
+    private lateinit var publicationList: MutableList<Publication>
+    private val publicationUseCase = PublicationUseCase(PublicationRepositoryImpl(RetrofitInstance.service))
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListCampaignBinding.inflate(inflater, container, false)
+        _binding = FragmentListPublicationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,7 +48,7 @@ class ListCampaignFragment : Fragment(R.layout.fragment_list_campaign), OnCampai
 
         lifecycleScope.launchWhenCreated {
             val response = try {
-                campaignUseCase.getAllCampaign()
+                publicationUseCase.getAllPublications()
             } catch(e: IOException) {
                 Log.e(ContentValues.TAG, "IOException, you might not have internet connection")
                 Toast.makeText(requireContext(), "You might not have internet connection", Toast.LENGTH_SHORT).show()
@@ -58,24 +59,21 @@ class ListCampaignFragment : Fragment(R.layout.fragment_list_campaign), OnCampai
                 return@launchWhenCreated
             }
             if(response.isSuccessful && response.body() != null) {
-                campaignList = (response.body() as MutableList<Campaign>?)!!
-                setupRecyclerView()
-            } else {
-                Log.e(ContentValues.TAG, "Response not successful")
-                Toast.makeText(requireContext(), "Response not successful", Toast.LENGTH_SHORT).show()
+                publicationList = (response.body() as MutableList<Publication>?)!!
+                setpRecyclerView()
             }
         }
     }
-    private fun setupRecyclerView() = binding.campaignRecycle.apply {
-        listCampaignAdapter = ListCampaignAdapter(this@ListCampaignFragment)
-        listCampaignAdapter!!.campaignsList = campaignList
-        addItemDecoration(SpacingOnSide(resources.getDimension(R.dimen.recycler_view_item_space).toInt()))
-        layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+    override fun onPublicationClick(publication: Publication) {
+        val intent = Intent(activity, InstitutionProfileFragment::class.java)
+        intent.putExtra("INSTITUTION_ID", publication.institutionId)
+        startActivity(intent)
     }
 
-    override fun onCampaignClick(campaign: Campaign) {
-        val intent = Intent(activity, InstitutionProfileFragment::class.java)
-        intent.putExtra("INSTITUTION_ID", campaign.institutionId)
-        startActivity(intent)
+    private fun setpRecyclerView() = binding.publicationRecycleView.apply {
+        listPublicationAdapter = ListPublicationsAdapter(this@ListPublicationFragment)
+        listPublicationAdapter!!.publicationList = publicationList
+        addItemDecoration(SpacingOnSide(resources.getDimension(R.dimen.recycler_view_item_space).toInt()))
+        layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
     }
 }

@@ -10,4 +10,5 @@ class InstitutionUseCase(
     suspend fun createInstitution(institution: Institution): Response<Institution> = repository.createInstitution(institution)
     suspend fun updateInstitution(id: String, institution: Institution): Response<Institution> = repository.updateInstitution(id, institution)
     suspend fun deleteInstitution(id: String): Response<Institution> = repository.deleteInstitution(id)
+    suspend fun getInstitution(id: String): Response<Institution> = repository.getInstitution(id)
 }

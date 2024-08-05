@@ -21,7 +21,7 @@ import com.example.doa_app.data.model.Image
 import com.example.doa_app.data.model.Publication
 import com.example.doa_app.data.repository.CampaignRepositoryImpl
 import com.example.doa_app.data.repository.PublicationRepositoryImpl
-import com.example.doa_app.databinding.ActivityFragmentAddPublicationBinding
+import com.example.doa_app.databinding.FragmentAddPublicationBinding
 import com.example.doa_app.domain.usecase.CampaignUseCase
 import com.example.doa_app.domain.usecase.PublicationUseCase
 import com.example.doa_app.presentation.ui.view.ListImagesAdapter
@@ -29,8 +29,8 @@ import com.example.doa_app.presentation.ui.view.SpacingOnSide
 import com.example.doa_app.utils.ImageUtils
 import kotlinx.coroutines.launch
 
-class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publication) {
-    private var _binding: ActivityFragmentAddPublicationBinding? = null
+class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
+    private var _binding: FragmentAddPublicationBinding? = null
     private val binding get() = _binding!!
 
     private var typePublication = 0
@@ -47,7 +47,7 @@ class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publicati
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ActivityFragmentAddPublicationBinding.inflate(inflater, container, false)
+        _binding = FragmentAddPublicationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -77,21 +77,21 @@ class AddPublicationFragment : Fragment(R.layout.activity_fragment_add_publicati
         binding.campaignButton.setOnClickListener {
             binding.campaignButton.setBackgroundResource(R.drawable.button_simple)
             binding.campaignButton.setTextColor(white)
-            binding.publicationButton.setBackgroundResource(R.drawable.red_stroke)
+            binding.publicationButton.setBackgroundResource(R.drawable.red_stroke_bt)
             binding.publicationButton.setTextColor(redPrincipal)
             binding.editTextDate.visibility = View.VISIBLE
             binding.addressInputText.visibility = View.VISIBLE
-            typePublication = 1
+            typePublication = 0
         }
 
         binding.publicationButton.setOnClickListener {
-            binding.campaignButton.setBackgroundResource(R.drawable.red_stroke)
+            binding.campaignButton.setBackgroundResource(R.drawable.red_stroke_bt)
             binding.campaignButton.setTextColor(redPrincipal)
             binding.publicationButton.setBackgroundResource(R.drawable.button_simple)
             binding.publicationButton.setTextColor(white)
             binding.editTextDate.visibility = View.INVISIBLE
             binding.addressInputText.visibility = View.INVISIBLE
-            typePublication = 0
+            typePublication = 1
         }
 
         binding.publishButton.setOnClickListener {

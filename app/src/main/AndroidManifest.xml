@@ -24,7 +24,7 @@
             android:name=".presentation.ui.activity.fragments.AddPublicationFragment"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.activity.fragments.HomeUserFragment"
+            android:name=".presentation.ui.activity.HomeUserActivity"
             android:exported="false" />
         <activity android:name=".presentation.ui.activity.HomeInstitutionActivity" />
         <activity

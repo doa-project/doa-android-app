@@ -9,7 +9,7 @@ import com.example.doa_app.data.model.Campaign
 import com.example.doa_app.databinding.CampaignBinding
 
 private lateinit var imageRecycleAdapter: ListImagesAdapter
-class ListCampaignAdapter : RecyclerView.Adapter<ListCampaignAdapter.ListCampaignViewHolder>()  {
+class ListCampaignAdapter(private val listener: OnCampaignClickListener) : RecyclerView.Adapter<ListCampaignAdapter.ListCampaignViewHolder>()  {
         inner class ListCampaignViewHolder(val binding: CampaignBinding) : RecyclerView.ViewHolder(binding.root)
 
         private val diffCallback = object : DiffUtil.ItemCallback<Campaign>() {
@@ -22,7 +22,7 @@ class ListCampaignAdapter : RecyclerView.Adapter<ListCampaignAdapter.ListCampaig
         }
 
         private val differ = AsyncListDiffer(this, diffCallback)
-        private var campaignsList: List<Campaign>
+    var campaignsList: MutableList<Campaign>
             get() = differ.currentList
             set(value) { differ.submitList(value) }
 
@@ -35,6 +35,7 @@ class ListCampaignAdapter : RecyclerView.Adapter<ListCampaignAdapter.ListCampaig
                 parent,
                 false
             ))
+
         }
         override fun onBindViewHolder(holder: ListCampaignViewHolder, position: Int) {
             holder.binding.apply {
@@ -48,6 +49,12 @@ class ListCampaignAdapter : RecyclerView.Adapter<ListCampaignAdapter.ListCampaig
                 imageListView.adapter = imageRecycleAdapter
                 imageRecycleAdapter.imagesList = campaigns.images
 
+                institutionImage.setOnClickListener {
+                    listener.onCampaignClick(campaigns)
+                }
+                institutionName.setOnClickListener {
+                    listener.onCampaignClick(campaigns)
+                }
             }
         }
     }

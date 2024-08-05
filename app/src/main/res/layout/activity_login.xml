@@ -68,9 +68,9 @@
         android:id="@+id/email_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/publicsans_regular"
+        android:fontFamily="@font/publicsans_bold"
         android:text="@string/email"
-        android:textColor="@color/grey_text_not_emphasis"
+        android:textColor="@color/grey_disabled"
         app:layout_constraintBottom_toTopOf="@+id/email_forms"
         app:layout_constraintStart_toStartOf="@+id/email_forms" />
 
@@ -78,9 +78,9 @@
         android:id="@+id/senha_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/publicsans_regular"
+        android:fontFamily="@font/publicsans_bold"
         android:text="@string/senha"
-        android:textColor="@color/grey_text_not_emphasis"
+        android:textColor="@color/grey_disabled"
         app:layout_constraintBottom_toTopOf="@+id/password_forms"
         app:layout_constraintStart_toStartOf="@+id/password_forms" />
 
