@@ -1,6 +1,6 @@
 package com.example.doa_app.domain.repository
 
-import com.example.doa_app.data.model.Institution
+import com.example.doa_app.data.model.api.Institution
 import retrofit2.Response
 
 interface InstitutionRepository {

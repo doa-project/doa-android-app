@@ -1,10 +1,12 @@
 package com.example.doa_app.data.datasource
 
-import com.example.doa_app.data.model.Campaign
-import com.example.doa_app.data.model.Institution
-import com.example.doa_app.data.model.Login
-import com.example.doa_app.data.model.Publication
-import com.example.doa_app.data.model.User
+import com.example.doa_app.data.model.mobile.CampaignMob
+import com.example.doa_app.data.model.api.CampaignAPI
+import com.example.doa_app.data.model.api.Institution
+import com.example.doa_app.data.model.api.Login
+import com.example.doa_app.data.model.mobile.PublicationMob
+import com.example.doa_app.data.model.api.PublicationAPI
+import com.example.doa_app.data.model.api.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -16,7 +18,7 @@ import retrofit2.http.Path
 //Classe que representa a camada de comunicação com a API
 interface Service{
     //USER CRUD
-    @POST("user/create/")
+    @POST("user/create")
     suspend fun createUser(@Body user: User): Response<User>
     @PUT("user/edit/{id}")
     suspend fun updateUser(@Path("id") id: String, @Body user: User): Response<User>
@@ -24,11 +26,11 @@ interface Service{
     suspend fun deleteUser(@Path("id") id: String): Response<User>
 
     //LOGIN
-    @POST("user/login/")
+    @POST("user/login")
     suspend fun login(@Body login: Login): Response<Any>
 
     //INSTITUTION CRUD
-    @POST("institution/create/")
+    @POST("institution/create")
     suspend fun createInstitution( @Body institution: Institution): Response<Institution>
     @PUT("institution/edit/{id}")
     suspend fun updateInstitution(@Path("id") id: String, @Body institution: Institution): Response<Institution>
@@ -38,19 +40,19 @@ interface Service{
     suspend fun getInstitution(@Path("id") id: String): Response<Institution>
 
     //CAMPAIN CRUD
-    @POST("campain/create/")
-    suspend fun createCampaign(@Body campaign: Campaign): Response<Campaign>
-    @GET("campain/get/")
-    suspend fun getAllCampaign(): Response<List<Campaign>>
-    @GET("campain/get/{id_institution}")
-    suspend fun getAllCampaignOfInstitution(@Path("id_institution") id: String): Response<List<Campaign>>
+    @POST("campaign/create")
+    suspend fun createCampaign(@Body campaign: CampaignAPI): Response<CampaignMob>
+    @GET("campaign/get")
+    suspend fun getAllCampaign(): Response<List<CampaignAPI>>
+    @GET("campaign/get/{id_institution}")
+    suspend fun getAllCampaignOfInstitution(@Path("id_institution") id: String): Response<List<CampaignMob>>
 
     //PUBLICATION CRUD
-    @POST("publication/create/")
-    suspend fun createPublication(@Body publication: Publication): Response<Publication>
-    @GET("publication/get/")
-    suspend fun getAllPublications(): Response<List<Publication>>
+    @POST("publication/create")
+    suspend fun createPublication(@Body publication: PublicationAPI): Response<PublicationMob>
+    @GET("publication/get")
+    suspend fun getAllPublications(): Response<List<PublicationAPI>>
     @GET("publication/get/{id_institution}")
-    suspend fun getAllPublicationsOfInstitution(@Path("id_institution") id: String): Response<List<Publication>>
+    suspend fun getAllPublicationsOfInstitution(@Path("id_institution") id: String): Response<List<PublicationMob>>
 
 }

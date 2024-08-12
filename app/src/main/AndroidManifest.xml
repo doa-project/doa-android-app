@@ -15,7 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Doaapp">
         <activity
-            android:name=".presentation.ui.activity.LoginActivity"
+            android:name=".presentation.ui.activity.fragments.InstitutionProfileFragment"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.activity.fragments.ListCampaignFragment"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.activity.fragments.ListPublicationFragment"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.activity.fragments.UserProfileFragment"
@@ -26,7 +32,12 @@
         <activity
             android:name=".presentation.ui.activity.HomeUserActivity"
             android:exported="false" />
-        <activity android:name=".presentation.ui.activity.HomeInstitutionActivity" />
+        <activity
+            android:name=".presentation.ui.activity.HomeInstitutionActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".presentation.ui.activity.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.activity.SplashScreenActivity"
             android:exported="true">

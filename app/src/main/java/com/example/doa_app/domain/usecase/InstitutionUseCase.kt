@@ -1,6 +1,6 @@
 package com.example.doa_app.domain.usecase
 
-import com.example.doa_app.data.model.Institution
+import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.domain.repository.InstitutionRepository
 import retrofit2.Response
 

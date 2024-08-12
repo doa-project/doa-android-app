@@ -1,7 +1,6 @@
 package com.example.doa_app.domain.usecase
 
-import com.example.doa_app.data.model.Login
-import com.example.doa_app.data.model.User
+import com.example.doa_app.data.model.api.User
 import com.example.doa_app.domain.repository.UserRepository
 import retrofit2.Response
 

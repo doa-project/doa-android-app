@@ -1,12 +1,13 @@
 package com.example.doa_app.presentation.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.doa_app.R
-import com.example.doa_app.data.model.User
+import com.example.doa_app.data.model.api.User
 import com.example.doa_app.databinding.ActivityHomeUserBinding
 import com.example.doa_app.presentation.ui.activity.fragments.ListCampaignFragment
 import com.example.doa_app.presentation.ui.activity.fragments.ListPublicationFragment
@@ -23,15 +24,22 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
 
     private lateinit var userLogged: User
 
+    private val gson = Gson()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent = intent.extras
-        val data = intent?.getString("loggedUser")
+        val data = intent?.getStringExtra("loggedUser")
         if (data != null) {
-            userLogged = Gson().fromJson(data, User::class.java)
+            userLogged = gson.fromJson(data, User::class.java)
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<ListPublicationFragment>(R.id.fragment)
         }
 
         btHome = binding.btHome
@@ -70,7 +78,7 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
 
             val fragment = UserProfileFragment()
             val bundle = Bundle()
-            bundle.putString("USER_LOGGED", Gson().toJson(userLogged))
+            bundle.putString("loggedUser", gson.toJson(userLogged))
             fragment.arguments = bundle
 
             supportFragmentManager.commit {

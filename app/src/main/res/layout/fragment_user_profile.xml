@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/noprofileimage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/noimageprofile"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/doauser"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,16 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/publicsans_medium"
-        android:textSize="20sp"
+        android:textColor="@color/black_text_emphasis"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/noprofileimage"
         app:layout_constraintStart_toEndOf="@+id/noprofileimage"
         app:layout_constraintTop_toTopOf="@+id/noprofileimage" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/exitButton"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button_simple"
         android:text="logout"
         android:textAllCaps="false"
@@ -41,5 +42,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noprofileimage"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,11 @@
-package com.example.doa_app.data.model
+package com.example.doa_app.data.model.mobile
 
-import android.graphics.Bitmap
-import android.util.Base64
-
-data class Campaign(
+data class CampaignMob(
     val id: String?,
+    val campaignId: Int?,
     val institutionId: String,
     val institutionName: String?,
-    val institutionPhoto: Bitmap?,
+    val institutionPhoto: String?,
     val description: String,
     val images: MutableList<Image>,
     val endDate: String,

@@ -8,9 +8,7 @@
     <string name="email">email</string>
     <string name="o_que_voc_quer_contar_ao_mundo">o que você quer contar ao mundo?..</string>
     <string name="qual_o_endere_o">qual o endereço?</string>
-    <string name="quando_vai_acontecer">quando vai acontecer?</string>
+    <string name="quando_vai_acontecer">quando? (dd/MM/yyyy)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="app_name">doa</string>
-    <string name="app_name">doa</string>
 </resources>

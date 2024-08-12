@@ -1,7 +1,7 @@
 package com.example.doa_app.data.repository
 
 import com.example.doa_app.data.datasource.Service
-import com.example.doa_app.data.model.User
+import com.example.doa_app.data.model.api.User
 import com.example.doa_app.domain.repository.UserRepository
 import retrofit2.Response
 

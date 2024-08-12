@@ -5,16 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import com.example.doa_app.R
 import com.example.doa_app.RetrofitInstance
-import com.example.doa_app.data.model.Institution
+import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.repository.InstitutionRepositoryImpl
 import com.example.doa_app.databinding.FragmentInstitutionProfileBinding
 import com.example.doa_app.domain.usecase.InstitutionUseCase
 import com.example.doa_app.utils.ImageUtils
 import com.google.gson.Gson
-import kotlinx.coroutines.launch
 
 class InstitutionProfileFragment : Fragment(R.layout.fragment_institution_profile) {
     private var _binding: FragmentInstitutionProfileBinding? = null
@@ -38,17 +36,12 @@ class InstitutionProfileFragment : Fragment(R.layout.fragment_institution_profil
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val data = it.getString("INSTITUTION_ID")
-//           lifecycleScope.launch {
-//               institutionUseCase.getInstitution(data!!).body()?.let {
-//                       it1 -> institutionLogged = it1
-//                   binding.profileimage.setImageBitmap(utils.base64ToBitmap(institutionLogged.photo.toString()))
-//                   binding.institutionname.text = institutionLogged.name
-//                   binding.descripition.text = institutionLogged.description
-//               }
-//            }
+            val data = it.getString("loggedUser")
+            val dataJson = Gson().fromJson(data, Institution::class.java)
+            institutionLogged = dataJson
+
         }
-        binding.profileimage.setImageBitmap(utils.base64ToBitmap(institutionLogged.photo.toString()))
+//        binding.profileimage.setImageBitmap()
         binding.institutionname.text = institutionLogged.name
         binding.descripition.text = institutionLogged.description
 

@@ -1,4 +1,4 @@
-package com.example.doa_app.data.model
+package com.example.doa_app.data.model.api
 
 data class Login(
     val email: String,

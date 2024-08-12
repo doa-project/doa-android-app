@@ -84,17 +84,17 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/background_header"
                 android:src="@drawable/igalery"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addressInputText" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 
             <Button
                 android:id="@+id/publishButton"
                 android:layout_width="360dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/button_simple"
                 android:fontFamily="@font/publicsans_semibold"
                 android:text="Publicar"
@@ -102,27 +102,27 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/galeryButton" />
+                app:layout_constraintTop_toBottomOf="@+id/addressInputText" />
 
             <EditText
                 android:id="@+id/editTextDate"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/forms_simple"
                 android:ems="10"
                 android:hint="@string/quando_vai_acontecer"
                 android:inputType="text"
                 android:padding="8dp"
                 android:paddingStart="16dp"
-                android:textColorHint="@color/grey_disabled"
                 android:textColor="@color/grey_text"
+                android:textColorHint="@color/grey_disabled"
                 app:layout_constraintEnd_toEndOf="@+id/addressInputText"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/galeryButton"
-                app:layout_constraintTop_toBottomOf="@+id/addressInputText" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 
             <EditText
                 android:id="@+id/addressInputText"
@@ -135,11 +135,23 @@
                 android:inputType="text"
                 android:padding="8dp"
                 android:paddingStart="16dp"
-                android:textColorHint="@color/grey_disabled"
                 android:textColor="@color/grey_text"
+                android:textColorHint="@color/grey_disabled"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="invisible"
+                android:indeterminateTint="@color/red_principal"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

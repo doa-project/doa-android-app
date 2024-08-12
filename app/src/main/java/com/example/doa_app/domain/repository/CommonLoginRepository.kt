@@ -1,7 +1,6 @@
 package com.example.doa_app.domain.repository
 
-import com.example.doa_app.data.model.Login
-import com.example.doa_app.data.model.User
+import com.example.doa_app.data.model.api.Login
 import retrofit2.Response
 
 interface CommonLoginRepository {
