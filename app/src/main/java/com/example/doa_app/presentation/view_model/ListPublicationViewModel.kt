@@ -19,10 +19,10 @@ import java.io.IOException
 import java.util.concurrent.TimeoutException
 
 class ListPublicationViewModel(
-    private val sharedPreferences: SharedPreferences,
     private val publicationUseCase: PublicationUseCase,
-    private val treatmentApiObjects: TreatmentApiObjects
-) : ViewModel() {
+    private val treatmentApiObjects: TreatmentApiObjects,
+    private val sharedPreferences: SharedPreferences
+    ) : ViewModel() {
 
     val publicationMobList = MutableLiveData<List<PublicationMob>>()
     val errorMessage = MutableLiveData<String>()

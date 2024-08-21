@@ -17,6 +17,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
     private val gson = Gson()
+    private val sharedPreferences = requireActivity().getSharedPreferences("login", 0)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,17 +34,14 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            var data = it.getString("loggedUser")
-            if (data != null) {
-                val dataJson = gson.fromJson(data, User::class.java)
-                binding.emailuser.text = dataJson.email
-            }
-            else {
-                data = it.getString("loggedInstitution")
-                val dataJson = gson.fromJson(data, Institution::class.java)
-                binding.emailuser.text = dataJson.email
-            }
+        val loggedUser = sharedPreferences.getString("loggedUser", null)
+        val loggedInstitution = sharedPreferences.getString("loggedInstitution", null)
+
+        if (loggedUser != null) {
+            binding.emailuser.text = gson.fromJson(loggedUser, User::class.java).email
+        }
+        else if (loggedInstitution != null) {
+            binding.emailuser.text = gson.fromJson(loggedInstitution, Institution::class.java).email
         }
 
         binding.exitButton.setOnClickListener {

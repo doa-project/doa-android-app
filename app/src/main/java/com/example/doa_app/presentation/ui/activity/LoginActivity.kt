@@ -10,12 +10,19 @@ import com.example.doa_app.databinding.ActivityLoginBinding
 import com.example.doa_app.domain.usecase.CommonLoginUseCase
 import com.example.doa_app.presentation.view_model.LoginViewModel
 import com.example.doa_app.presentation.view_model.factory.LoginViewModelFactory
+import com.example.doa_app.utils.SharedPreferences
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+
+    private val sharedPref = SharedPreferences(this, "login")
+    private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
+    private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
+
     private val loginViewModel: LoginViewModel by viewModels{
         LoginViewModelFactory(
-            CommonLoginUseCase(CommonLoginRepositoryImpl(RetrofitInstance.service))
+            CommonLoginUseCase(CommonLoginRepositoryImpl(RetrofitInstance.service)),
+            sharedPref
         )
     }
 
@@ -35,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginViewModel.loginSuccess.observe(this) { (success, intent) ->
-            if (success && intent != null) {
+            if (success) {
                 startActivity(intent)
             }
         }
@@ -45,5 +52,12 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordForms.text.toString()
             loginViewModel.login(email, password)
         }
+    }
+
+    override fun onDestroy() {
+        sharedPref.clear()
+        sharedPrefCurrentCampaign.clear()
+        sharedPrefCurrentPublication.clear()
+        super.onDestroy()
     }
 }

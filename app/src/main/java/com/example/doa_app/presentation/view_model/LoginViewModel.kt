@@ -25,7 +25,7 @@ class LoginViewModel(
 ) : ViewModel() {
     private val gson = Gson()
 
-    val loginSuccess = MutableLiveData<Pair<Boolean, Intent?>>()
+    val loginSuccess = MutableLiveData<Pair<Boolean, Intent>>()
     val loadingVisibility = MutableLiveData<Int>()
     val errorMessage = MutableLiveData<String>()
 
@@ -45,24 +45,27 @@ class LoginViewModel(
                         Log.d("Login", "Institution onCreate: $response")
                         val institution = gson.fromJson(responseJson, Institution::class.java)
                         Log.d("Login", "Institution onCreate: $response")
-                        val intent = if (institution.institutionId != 0) {
-                            Intent(Intent.ACTION_MAIN).apply {
+                        val intent: Intent
+                        if (institution.institutionId != 0) {
+                            saveInstitutionLocalStorage(responseJson)
+                            intent = Intent(Intent.ACTION_MAIN).apply {
                                 setClassName(
                                     "com.example.doa_app",
                                     "com.example.doa_app.presentation.ui.activity.HomeInstitutionActivity"
                                 )
-                                putExtra("loggedUser", responseJson)
                             }
                         } else {
-                            Intent(Intent.ACTION_MAIN).apply {
+                            saveUserLocalStorage(responseJson)
+                            intent = Intent(Intent.ACTION_MAIN).apply {
                                 setClassName(
                                     "com.example.doa_app",
                                     "com.example.doa_app.presentation.ui.activity.HomeUserActivity"
                                 )
-                                putExtra("loggedUser", responseJson)
                             }
                         }
                         loginSuccess.value = Pair(true, intent)
+                        hideLoading()
+                        return@launch
                     } catch (e: Exception) {
                         errorMessage.value = "An error occurred"
                         hideLoading()

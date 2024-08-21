@@ -12,6 +12,7 @@ import com.example.doa_app.databinding.ActivityHomeUserBinding
 import com.example.doa_app.presentation.ui.activity.fragments.ListCampaignFragment
 import com.example.doa_app.presentation.ui.activity.fragments.ListPublicationFragment
 import com.example.doa_app.presentation.ui.activity.fragments.UserProfileFragment
+import com.example.doa_app.utils.SharedPreferences
 import com.google.gson.Gson
 
 class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
@@ -22,26 +23,23 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
     private lateinit var btViewCampaign: ImageButton
     private lateinit var btUser: ImageButton
 
-    private lateinit var userLogged: User
+//    private lateinit var userLogged: User
+//    private val gson = Gson()
 
-    private val gson = Gson()
+
+    private val sharedPref = SharedPreferences(this, "login")
+    private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
+    private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = intent?.getStringExtra("loggedUser")
-        if (data != null) {
-            userLogged = gson.fromJson(data, User::class.java)
-        } else {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<ListPublicationFragment>(R.id.fragment)
         }
-
         btHome = binding.btHome
         btHomeLogo = binding.btHomeLogo
         btViewCampaign = binding.btViewCampaign
@@ -50,6 +48,13 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
         addClick()
 
     }
+    override fun onDestroy() {
+        sharedPref.clear()
+        sharedPrefCurrentCampaign.clear()
+        sharedPrefCurrentPublication.clear()
+        super.onDestroy()
+    }
+
     private fun addClick() {
         btHome.setOnClickListener {
             btHome.setImageResource(R.drawable.ihomes);
@@ -76,14 +81,9 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
             btViewCampaign.setImageResource(R.drawable.icampaignn);
             btUser.setImageResource(R.drawable.iprofiles);
 
-            val fragment = UserProfileFragment()
-            val bundle = Bundle()
-            bundle.putString("loggedUser", gson.toJson(userLogged))
-            fragment.arguments = bundle
-
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace(R.id.fragment, fragment)
+                replace<UserProfileFragment>(R.id.fragment)
             }
         }
     }

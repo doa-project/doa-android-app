@@ -23,8 +23,11 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
     private lateinit var btHomeLogo: ImageButton
     private lateinit var btAddCreate: ImageButton
     private lateinit var btUser: ImageButton
-    private lateinit var institutionLogged: Institution
-    private val gson = Gson()
+//    private lateinit var institutionLogged: Institution
+//    private val gson = Gson()
+
+    private val sharedPref = SharedPreferences(this, "login")
+    private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
     private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,18 +45,19 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
             replace<ListPublicationFragment>(R.id.fragment)
         }
 
-        val data = intent?.getStringExtra("loggedUser")
-        if (data != null) {
-            institutionLogged = gson.fromJson(data, Institution::class.java)
-            Log.d("HomeInstitutionActivity", "onCreate: $institutionLogged")
-        } else {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-
+//        val data = intent?.getStringExtra("loggedUser")
+//        if (data != null) {
+//            institutionLogged = gson.fromJson(data, Institution::class.java)
+//            Log.d("HomeInstitutionActivity", "onCreate: $institutionLogged")
+//        } else {
+//            startActivity(Intent(this, LoginActivity::class.java))
+//        }
         addClick()
     }
 
     override fun onDestroy() {
+        sharedPref.clear()
+        sharedPrefCurrentCampaign.clear()
         sharedPrefCurrentPublication.clear()
         super.onDestroy()
     }
@@ -73,14 +77,9 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
             btAddCreate.setImageResource(R.drawable.icreates);
             btUser.setImageResource(R.drawable.iprofilen);
 
-            val fragment = AddPublicationFragment()
-            val bundle = Bundle()
-            bundle.putString("loggedUser", gson.toJson(institutionLogged))
-            fragment.arguments = bundle
-
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace(R.id.fragment, fragment)
+                replace<AddPublicationFragment>(R.id.fragment)
             }
         }
         btUser.setOnClickListener {
@@ -88,14 +87,9 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
             btAddCreate.setImageResource(R.drawable.icreaten);
             btUser.setImageResource(R.drawable.iprofiles);
 
-            val fragment = UserProfileFragment()
-            val bundle = Bundle()
-            bundle.putString("loggedInstitution", gson.toJson(institutionLogged))
-            fragment.arguments = bundle
-
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace(R.id.fragment, fragment)
+                replace<AddPublicationFragment>(R.id.fragment)
             }
         }
     }
