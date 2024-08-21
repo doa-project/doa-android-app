@@ -2,21 +2,15 @@ package com.example.doa_app.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.media.ExifInterface
 import android.net.Uri
-import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.util.zip.GZIPOutputStream
 
 class ImageUtils {
     fun bitmapToBase64(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
         val squareBitmap = cropToSquare(bitmap)
-        squareBitmap.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream)
+        squareBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         Base64.encodeToString(byteArray, Base64.DEFAULT)
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
@@ -73,7 +67,7 @@ class ImageUtils {
 //        return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
 //    }
     private fun cropToSquare(bitmap: Bitmap): Bitmap {
-        val dimension = Math.min(bitmap.width, bitmap.height)
+        val dimension = bitmap.width.coerceAtMost(bitmap.height)
         val width = (bitmap.width - dimension) / 2
         val height = (bitmap.height - dimension) / 2
         return Bitmap.createBitmap(bitmap, width, height, dimension, dimension)

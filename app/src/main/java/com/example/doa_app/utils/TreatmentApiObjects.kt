@@ -6,7 +6,7 @@ import com.example.doa_app.data.model.mobile.PublicationMob
 import com.example.doa_app.data.model.api.PublicationAPI
 import com.example.doa_app.data.model.mobile.Image
 class TreatmentApiObjects {
-    fun publicationApiToPublication(publicationAPI: PublicationAPI): PublicationMob {
+    private fun publicationApiToPublication(publicationAPI: PublicationAPI): PublicationMob {
         val mutableList = mutableListOf<Image>()
         for ((cont, image) in publicationAPI.images.withIndex()) {
             mutableList.add(

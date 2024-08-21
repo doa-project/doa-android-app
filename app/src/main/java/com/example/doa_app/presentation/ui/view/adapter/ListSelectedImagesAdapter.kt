@@ -9,7 +9,7 @@ import com.example.doa_app.data.model.mobile.Image
 import com.example.doa_app.databinding.ImageRecycleItemBinding
 import com.example.doa_app.utils.ImageUtils
 
-class ListImagesAdapter : RecyclerView.Adapter<ListImagesAdapter.ListImageViewHolder>() {
+class ListSelectedImagesAdapter : RecyclerView.Adapter<ListSelectedImagesAdapter.ListImageViewHolder>() {
     private val imageUtils = ImageUtils()
     inner class ListImageViewHolder(val binding: ImageRecycleItemBinding) : RecyclerView.ViewHolder(binding.root)
 

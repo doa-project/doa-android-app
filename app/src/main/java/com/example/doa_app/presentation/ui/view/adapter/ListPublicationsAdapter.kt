@@ -55,7 +55,7 @@ class ListPublicationsAdapter : RecyclerView.Adapter<ListPublicationsAdapter.Lis
             institutionImage.setImageBitmap(imageUtils.base64ToBitmap(publication.institutionPhoto ?: ""))
             description.text = publication.description
             fun setupListImageRecyclerView() = imageListView.apply {
-                val listImageAdapter = ListOfImagesAdapter()
+                val listImageAdapter = ListImagesPublicationsAdapter()
                 listImageAdapter.imagesList = publication.images
                 adapter = listImageAdapter
                 addItemDecoration(

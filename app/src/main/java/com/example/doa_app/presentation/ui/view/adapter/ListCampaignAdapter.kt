@@ -51,7 +51,7 @@ class ListCampaignAdapter: RecyclerView.Adapter<ListCampaignAdapter.ListCampaign
                 local.text = campaigns.local
                 date.text = campaigns.endDate
                 fun setupListImageRecyclerView() = imageListView.apply {
-                    val listImageAdapter = ListOfImagesAdapter()
+                    val listImageAdapter = ListImagesPublicationsAdapter()
                     listImageAdapter.imagesList = campaigns.images
                     adapter = listImageAdapter
                     addItemDecoration(

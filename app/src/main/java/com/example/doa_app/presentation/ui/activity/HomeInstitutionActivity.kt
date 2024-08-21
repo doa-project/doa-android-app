@@ -13,6 +13,7 @@ import com.example.doa_app.databinding.ActivityHomeInstitutionBinding
 import com.example.doa_app.presentation.ui.activity.fragments.AddPublicationFragment
 import com.example.doa_app.presentation.ui.activity.fragments.ListPublicationFragment
 import com.example.doa_app.presentation.ui.activity.fragments.UserProfileFragment
+import com.example.doa_app.utils.SharedPreferences
 import com.google.gson.Gson
 
 class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institution) {
@@ -24,6 +25,7 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
     private lateinit var btUser: ImageButton
     private lateinit var institutionLogged: Institution
     private val gson = Gson()
+    private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,11 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
         }
 
         addClick()
+    }
+
+    override fun onDestroy() {
+        sharedPrefCurrentPublication.clear()
+        super.onDestroy()
     }
     private fun addClick() {
         btHome.setOnClickListener {

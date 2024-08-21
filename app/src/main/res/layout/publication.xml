@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/red_stroke_bt"
-    android:backgroundTint="@color/white"
     app:cardCornerRadius="20dp"
-    app:cardElevation="0dp">
-
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/style_publication_border">
 
         <ImageView
             android:id="@+id/institutionImage"
@@ -22,7 +21,8 @@
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:background="@drawable/style_profile_image"/>
 
         <TextView
             android:id="@+id/institutionName"

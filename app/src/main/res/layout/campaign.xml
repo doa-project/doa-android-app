@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/red_stroke_description"
-    android:backgroundTint="@color/white"
     app:cardCornerRadius="20dp"
-    app:cardElevation="0dp">
-
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/style_campaign_border">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -60,7 +59,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:background="@drawable/style_profile_image"/>
 
         <TextView
             android:id="@+id/institutionName"
@@ -80,7 +80,8 @@
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:textColor="@color/black_text_emphasis"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -111,7 +112,7 @@
             android:id="@+id/local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/black_text_emphasis"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -121,7 +122,7 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/black_text_emphasis"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -131,7 +132,9 @@
             android:id="@+id/imageListView"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="6dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
