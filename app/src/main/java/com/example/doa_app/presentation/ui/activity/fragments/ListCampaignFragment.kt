@@ -20,18 +20,21 @@ import com.example.doa_app.presentation.ui.view.adapter.ListCampaignAdapter
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
 import com.example.doa_app.presentation.view_model.ListCampaignViewModel
 import com.example.doa_app.presentation.view_model.factory.ListCampaignViewModelFactory
+import com.example.doa_app.utils.SharedPreferences
 import com.example.doa_app.utils.TreatmentApiObjects
 
 class ListCampaignFragment : Fragment(R.layout.fragment_list_campaign) {
 
     private var _binding: FragmentListCampaignBinding? = null
+    private val sharedPreferences = SharedPreferences(requireContext(), "SharedPreferences")
     private val binding get() = _binding!!
     private var listCampaignAdapter: ListCampaignAdapter? = null
 
     private val viewModel: ListCampaignViewModel by viewModels {
         ListCampaignViewModelFactory(
             CampaignUseCase(CampaignRepositoryImpl(RetrofitInstance.service)),
-            TreatmentApiObjects()
+            TreatmentApiObjects(),
+            sharedPreferences
         )
     }
 

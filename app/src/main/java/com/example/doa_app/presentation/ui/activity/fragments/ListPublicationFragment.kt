@@ -17,18 +17,20 @@ import com.example.doa_app.presentation.ui.view.adapter.ListPublicationsAdapter
 import com.example.doa_app.presentation.ui.view.style.SpacingOnTop
 import com.example.doa_app.presentation.view_model.ListPublicationViewModel
 import com.example.doa_app.presentation.view_model.factory.ListPublicationViewModelFactory
+import com.example.doa_app.utils.SharedPreferences
 import com.example.doa_app.utils.TreatmentApiObjects
 
 class ListPublicationFragment : Fragment(R.layout.fragment_list_publication) {
     private var _binding: FragmentListPublicationBinding? = null
+    private val sharedPreferences = SharedPreferences(requireContext(), "SharedPreferences")
     private val binding get() = _binding!!
     private val listPublicationViewModel: ListPublicationViewModel by viewModels{
         ListPublicationViewModelFactory(
             PublicationUseCase(PublicationRepositoryImpl(RetrofitInstance.service)),
-            TreatmentApiObjects()
+            TreatmentApiObjects(),
+            sharedPreferences
         )
     }
-
     private var listPublicationAdapter: ListPublicationsAdapter? = null
 
     override fun onCreateView(
