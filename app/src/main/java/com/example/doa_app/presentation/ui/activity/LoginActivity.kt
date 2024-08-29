@@ -2,15 +2,11 @@ package com.example.doa_app.presentation.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.doa_app.RetrofitInstance
-import com.example.doa_app.data.repository.CommonLoginRepositoryImpl
 import com.example.doa_app.databinding.ActivityLoginBinding
-import com.example.doa_app.domain.usecase.CommonLoginUseCase
 import com.example.doa_app.presentation.view_model.LoginViewModel
-import com.example.doa_app.presentation.view_model.factory.LoginViewModelFactory
 import com.example.doa_app.utils.SharedPreferences
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -19,12 +15,8 @@ class LoginActivity : AppCompatActivity() {
     private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
     private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
 
-    private val loginViewModel: LoginViewModel by viewModels{
-        LoginViewModelFactory(
-            CommonLoginUseCase(CommonLoginRepositoryImpl(RetrofitInstance.service)),
-            sharedPref
-        )
-    }
+    private val loginViewModel = getViewModel<LoginViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

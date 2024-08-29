@@ -15,39 +15,26 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doa_app.R
-import com.example.doa_app.RetrofitInstance
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.mobile.Image
-import com.example.doa_app.data.repository.CampaignRepositoryImpl
-import com.example.doa_app.data.repository.PublicationRepositoryImpl
 import com.example.doa_app.databinding.FragmentAddPublicationBinding
-import com.example.doa_app.domain.usecase.CampaignUseCase
-import com.example.doa_app.domain.usecase.PublicationUseCase
 import com.example.doa_app.presentation.ui.view.adapter.ListSelectedImagesAdapter
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
 import com.example.doa_app.presentation.view_model.AddPublicationViewModel
-import com.example.doa_app.presentation.view_model.factory.AddPublicationViewModelFactory
 import com.example.doa_app.utils.ImageUtils
-import com.example.doa_app.utils.TreatmentApiObjects
 import com.google.gson.Gson
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
     private var _binding: FragmentAddPublicationBinding? = null
     private val binding get() = _binding!!
 
     // ViewModel integration
-    private val addPublicationViewModel: AddPublicationViewModel by viewModels{
-        AddPublicationViewModelFactory(
-            CampaignUseCase(CampaignRepositoryImpl(RetrofitInstance.service)),
-            PublicationUseCase(PublicationRepositoryImpl(RetrofitInstance.service)),
-            TreatmentApiObjects()
-        )
-    }
+    private val addPublicationViewModel = getViewModel<AddPublicationViewModel>()
 
-    private var listImageAdapter: ListSelectedImagesAdapter? = null
+        private var listImageAdapter: ListSelectedImagesAdapter? = null
     private val gson = Gson()
     private val imageUtils = ImageUtils()
 

@@ -8,11 +8,9 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.doa_app.RetrofitInstance
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.api.Login
-import com.example.doa_app.data.repository.CommonLoginRepositoryImpl
-import com.example.doa_app.domain.usecase.CommonLoginUseCase
+import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.utils.SharedPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -20,7 +18,7 @@ import java.io.IOException
 import java.util.concurrent.TimeoutException
 
 class LoginViewModel(
-    private val commonLoginUseCase: CommonLoginUseCase,
+    private val useCases: UseCases,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
     private val gson = Gson()
@@ -31,10 +29,10 @@ class LoginViewModel(
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
-            var response: Any
+            val response: Any
             try {
                 showLoading()
-                response = commonLoginUseCase.login(Login(email = email, password = password))
+                response = useCases.login(Login(email = email, password = password))
                 if (response.body() == null) {
                     errorMessage.value = "Invalid email or password"
                     hideLoading()

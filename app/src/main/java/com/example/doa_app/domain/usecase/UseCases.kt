@@ -10,7 +10,7 @@ import com.example.doa_app.data.model.mobile.PublicationMob
 import com.example.doa_app.domain.repository.Repository
 import retrofit2.Response
 
-class UseCase(
+class UseCases(
     private val repository: Repository
 ) {
     //Methods for CRUD of Campaign

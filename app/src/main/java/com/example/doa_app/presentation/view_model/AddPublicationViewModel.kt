@@ -2,8 +2,6 @@ package com.example.doa_app.presentation.view_model
 
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,14 +10,12 @@ import com.example.doa_app.data.model.api.CampaignAPI
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.api.PublicationAPI
 import com.example.doa_app.data.model.mobile.Image
-import com.example.doa_app.domain.usecase.CampaignUseCase
-import com.example.doa_app.domain.usecase.PublicationUseCase
+import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.utils.TreatmentApiObjects
 import kotlinx.coroutines.launch
 
 class AddPublicationViewModel(
-    private val publicationUseCase: PublicationUseCase,
-    private val campaignUseCase: CampaignUseCase,
+    private val useCases: UseCases,
     private val treatmentApiObjects: TreatmentApiObjects
 ) : ViewModel() {
 
@@ -97,7 +93,7 @@ class AddPublicationViewModel(
             imageToString
         )
         Log.d("AddPublicationViewModel", "createPublication: $publicationAPI")
-        publicationUseCase.createPublication(publicationAPI).let {
+        useCases.createPublication(publicationAPI).let {
             if (it.isSuccessful) {
                 _loadingVisibility.value = View.INVISIBLE
             }
@@ -125,7 +121,7 @@ class AddPublicationViewModel(
             date
         )
         Log.d("AddPublicationViewModel", "createCampaign: $campaignAPI")
-        campaignUseCase.createCampaign(campaignAPI).let {
+        useCases.createCampaign(campaignAPI).let {
             if (it.isSuccessful) {
                 _loadingVisibility.value = View.INVISIBLE
             }

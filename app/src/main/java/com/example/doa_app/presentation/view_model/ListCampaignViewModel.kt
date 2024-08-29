@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doa_app.data.model.mobile.CampaignMob
-import com.example.doa_app.data.model.mobile.PublicationMob
-import com.example.doa_app.domain.usecase.CampaignUseCase
+import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.utils.SharedPreferences
 import com.example.doa_app.utils.TreatmentApiObjects
 import com.example.doa_app.utils.gson
@@ -16,7 +15,7 @@ import java.io.IOException
 import java.util.concurrent.TimeoutException
 
 class ListCampaignViewModel(
-    private val campaignUseCase: CampaignUseCase,
+    private val useCases: UseCases,
     private val treatmentApiObjects: TreatmentApiObjects,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
@@ -37,7 +36,7 @@ class ListCampaignViewModel(
         } else {
             viewModelScope.launch {
                 try {
-                    val response = campaignUseCase.getAllCampaign().body()
+                    val response = useCases.getAllCampaign().body()
                     if (response.isNullOrEmpty()) {
                         errorMessage.value = "No campaigns found!"
                         Log.e("ListCampaignViewModel", "No publications found")

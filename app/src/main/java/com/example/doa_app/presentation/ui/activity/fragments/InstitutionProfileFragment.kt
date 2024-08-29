@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.doa_app.R
-import com.example.doa_app.RetrofitInstance
 import com.example.doa_app.data.model.api.Institution
-import com.example.doa_app.data.repository.InstitutionRepositoryImpl
 import com.example.doa_app.databinding.FragmentInstitutionProfileBinding
-import com.example.doa_app.domain.usecase.InstitutionUseCase
 import com.example.doa_app.utils.ImageUtils
 import com.google.gson.Gson
 
@@ -19,7 +16,7 @@ class InstitutionProfileFragment : Fragment(R.layout.fragment_institution_profil
     private val binding get() = _binding!!
     private lateinit var institutionLogged: Institution
     private val utils = ImageUtils()
-    private val institutionUseCase = InstitutionUseCase(InstitutionRepositoryImpl(RetrofitInstance.service))
+//    private val institutionUseCase = InstitutionUseCase(InstitutionRepositoryImpl(RetrofitInstance.service))
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

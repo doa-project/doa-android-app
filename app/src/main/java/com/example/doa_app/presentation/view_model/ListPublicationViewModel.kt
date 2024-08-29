@@ -1,7 +1,6 @@
 package com.example.doa_app.presentation.view_model
 
 import android.content.ContentValues
-import android.content.Context
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doa_app.data.model.mobile.PublicationMob
 import com.example.doa_app.data.model.api.PublicationAPI
-import com.example.doa_app.domain.usecase.PublicationUseCase
+import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.utils.SharedPreferences
 import com.example.doa_app.utils.TreatmentApiObjects
 import com.example.doa_app.utils.gson
@@ -19,7 +18,7 @@ import java.io.IOException
 import java.util.concurrent.TimeoutException
 
 class ListPublicationViewModel(
-    private val publicationUseCase: PublicationUseCase,
+    private val useCases: UseCases,
     private val treatmentApiObjects: TreatmentApiObjects,
     private val sharedPreferences: SharedPreferences
     ) : ViewModel() {
@@ -42,7 +41,7 @@ class ListPublicationViewModel(
                 var response: List<PublicationAPI>?
                 try {
                     showLoading()
-                    publicationUseCase.getAllPublications().let {
+                    useCases.getAllPublications().let {
                         response = it.body()
                         if (response.isNullOrEmpty()) {
                             errorMessage.value = "No publications found"

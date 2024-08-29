@@ -6,31 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doa_app.R
-import com.example.doa_app.RetrofitInstance
-import com.example.doa_app.data.repository.PublicationRepositoryImpl
 import com.example.doa_app.databinding.FragmentListPublicationBinding
-import com.example.doa_app.domain.usecase.PublicationUseCase
 import com.example.doa_app.presentation.ui.view.adapter.ListPublicationsAdapter
 import com.example.doa_app.presentation.ui.view.style.SpacingOnTop
 import com.example.doa_app.presentation.view_model.ListPublicationViewModel
-import com.example.doa_app.presentation.view_model.factory.ListPublicationViewModelFactory
 import com.example.doa_app.utils.SharedPreferences
-import com.example.doa_app.utils.TreatmentApiObjects
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ListPublicationFragment : Fragment(R.layout.fragment_list_publication) {
     private var _binding: FragmentListPublicationBinding? = null
     private val sharedPreferences = SharedPreferences(requireContext(), "SharedPreferences")
     private val binding get() = _binding!!
-    private val listPublicationViewModel: ListPublicationViewModel by viewModels{
-        ListPublicationViewModelFactory(
-            PublicationUseCase(PublicationRepositoryImpl(RetrofitInstance.service)),
-            TreatmentApiObjects(),
-            sharedPreferences
-        )
-    }
+    private val listPublicationViewModel = getViewModel<ListPublicationViewModel>()
     private var listPublicationAdapter: ListPublicationsAdapter? = null
 
     override fun onCreateView(

@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.doa_app.R
+import com.example.doa_app.presentation.view_model.ListPublicationOfInstitutionViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ListInstitutionPublicationFragment : Fragment() {
+
+    private val listPublicationOfInstitutionViewModel = getViewModel<ListPublicationOfInstitutionViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
