@@ -1,19 +1,16 @@
 package com.example.doa_app.presentation.ui.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.doa_app.R
-import com.example.doa_app.data.model.api.User
 import com.example.doa_app.databinding.ActivityHomeUserBinding
 import com.example.doa_app.presentation.ui.activity.fragments.ListCampaignFragment
 import com.example.doa_app.presentation.ui.activity.fragments.ListPublicationFragment
 import com.example.doa_app.presentation.ui.activity.fragments.UserProfileFragment
 import com.example.doa_app.utils.SharedPreferences
-import com.google.gson.Gson
 
 class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
     private lateinit var binding: ActivityHomeUserBinding
@@ -22,10 +19,6 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
     private lateinit var btHomeLogo: ImageButton
     private lateinit var btViewCampaign: ImageButton
     private lateinit var btUser: ImageButton
-
-//    private lateinit var userLogged: User
-//    private val gson = Gson()
-
 
     private val sharedPref = SharedPreferences(this, "login")
     private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
@@ -49,9 +42,9 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
 
     }
     override fun onDestroy() {
-        sharedPref.clear()
-        sharedPrefCurrentCampaign.clear()
-        sharedPrefCurrentPublication.clear()
+        sharedPref.clearAll()
+        sharedPrefCurrentCampaign.clearAll()
+        sharedPrefCurrentPublication.clearAll()
         super.onDestroy()
     }
 

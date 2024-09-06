@@ -12,9 +12,14 @@ class SharedPreferences(context: Context, name: String) {
     fun getString(key: String, defaultValue: String = ""): String? {
         return sharedPreferences.getString(key, defaultValue)
     }
-    fun clear() {
+    fun clearAll() {
         val editor = sharedPreferences.edit()
         editor.clear()
+        editor.apply()
+    }
+    fun clearKey(key: String) {
+        val editor = sharedPreferences.edit()
+        editor.remove(key)
         editor.apply()
     }
 }

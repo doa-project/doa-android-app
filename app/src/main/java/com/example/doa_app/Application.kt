@@ -1,6 +1,7 @@
 package com.example.doa_app
 
 import android.app.Application
+import com.example.doa_app.utils.SharedPreferences
 import org.koin.core.context.startKoin
 import org.koin.android.ext.koin.androidContext
 
@@ -11,5 +12,11 @@ class Application : Application() {
             androidContext(this@Application)
             modules(appModule)
         }
+    }
+    override fun onTerminate() {
+        super.onTerminate()
+        val sharedPref = SharedPreferences(this, "doa_app_cache")
+        sharedPref.clearKey("currentCampaign")
+        sharedPref.clearKey("currentPublication")
     }
 }

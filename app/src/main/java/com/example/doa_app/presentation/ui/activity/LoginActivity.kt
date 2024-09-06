@@ -6,22 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.doa_app.databinding.ActivityLoginBinding
 import com.example.doa_app.presentation.view_model.LoginViewModel
 import com.example.doa_app.utils.SharedPreferences
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
-    private val sharedPref = SharedPreferences(this, "login")
-    private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
-    private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
+//    private lateinit var sharedPreferences: SharedPreferences
+//    private lateinit var sharedPrefCurrentCampaign: SharedPreferences
+//    private lateinit var sharedPrefCurrentPublication: SharedPreferences
 
-    private val loginViewModel = getViewModel<LoginViewModel>()
-
+    private val loginViewModel: LoginViewModel by viewModel{parametersOf(this)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        sharedPreferences = SharedPreferences(this, "login")
+//        sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
+//        sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
 
         loginViewModel.loadingVisibility.observe(this) {
             binding.progressBar4.visibility = it
@@ -47,9 +51,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        sharedPref.clear()
-        sharedPrefCurrentCampaign.clear()
-        sharedPrefCurrentPublication.clear()
+//        sharedPreferences.clear()
+//        sharedPrefCurrentCampaign.clear()
+//        sharedPrefCurrentPublication.clear()
         super.onDestroy()
     }
 }

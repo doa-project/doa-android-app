@@ -1,5 +1,6 @@
 package com.example.doa_app
 
+import android.content.Context
 import com.example.doa_app.data.datasource.Service
 import com.example.doa_app.data.repository.RepositoryImpl
 import com.example.doa_app.domain.repository.Repository
@@ -10,9 +11,11 @@ import com.example.doa_app.presentation.view_model.ListCampaignViewModel
 import com.example.doa_app.presentation.view_model.ListPublicationOfInstitutionViewModel
 import com.example.doa_app.presentation.view_model.ListPublicationViewModel
 import com.example.doa_app.presentation.view_model.LoginViewModel
+import com.example.doa_app.utils.SharedPreferences
 import com.example.doa_app.utils.TreatmentApiObjects
 import com.example.doa_app.utils.gson
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,12 +39,54 @@ val appModule = module {
         UseCases(get())
     }
 
-    viewModel{
-        LoginViewModel(get(), get())
-        AddPublicationViewModel(get(), get())
-        ListCampaignViewModel(get(), get(), get())
-        ListPublicationViewModel(get(), get(), get())
-        ListCampaignOfInstitutionViewModel()
-        ListPublicationOfInstitutionViewModel()
+    factory {
+            (context: Context) ->
+        SharedPreferences(context, "doa_app_cache")
+    }
+
+    viewModel { (context: Context) ->
+        LoginViewModel(
+            useCases = get(),
+            sharedPreferences = get { parametersOf(context) }
+        )
+    }
+
+    viewModel { (context: Context) ->
+        AddPublicationViewModel(
+            useCases = get(),
+            treatmentApiObjects = get()
+        )
+    }
+
+    viewModel { (context: Context) ->
+        ListCampaignViewModel(
+            useCases = get(),
+            treatmentApiObjects = get(),
+            sharedPreferences = get { parametersOf(context) }
+        )
+    }
+
+    viewModel { (context: Context) ->
+        ListPublicationViewModel(
+            useCases = get(),
+            treatmentApiObjects = get(),
+            sharedPreferences = get { parametersOf(context) }
+        )
+    }
+
+    viewModel { (context: Context) ->
+        ListCampaignOfInstitutionViewModel(
+            useCases = get(),
+            treatmentApiObjects = get(),
+            sharedPreferences = get { parametersOf(context) }
+        )
+    }
+
+    viewModel { (context: Context) ->
+        ListPublicationOfInstitutionViewModel(
+            useCases = get(),
+            treatmentApiObjects = get(),
+            sharedPreferences = get { parametersOf(context) }
+        )
     }
 }
