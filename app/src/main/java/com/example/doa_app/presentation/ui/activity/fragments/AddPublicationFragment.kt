@@ -54,13 +54,8 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.editTextDate.visibility = View.INVISIBLE
-        binding.addressInputText.visibility = View.INVISIBLE
-
-        // Set up RecyclerView
         setupListImageRecyclerView()
 
-        // Observe ViewModel LiveData
         addPublicationViewModel.loadingVisibility.observe(viewLifecycleOwner) {
             binding.progressBar.visibility = it
         }
@@ -88,16 +83,6 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
             setupListImageRecyclerView()
         }
 
-        binding.campaignButton.setOnClickListener {
-            addPublicationViewModel.setPublicationType(2)
-            updateButtonStylesForCampaign()
-        }
-
-        binding.publicationButton.setOnClickListener {
-            addPublicationViewModel.setPublicationType(1)
-            updateButtonStylesForPublication()
-        }
-
         binding.publishButton.setOnClickListener {
             addPublicationViewModel.createPublicationOrCampaign(
                 description = binding.editTextTextMultiLine.text.toString(),
@@ -112,28 +97,6 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
         adapter = listImageAdapter
         addItemDecoration(SpacingOnSide(resources.getDimension(R.dimen.recycler_view_item_space).toInt()))
         layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-    }
-
-    private fun updateButtonStylesForCampaign() {
-        val redPrincipal = ContextCompat.getColor(requireContext(), R.color.red_principal)
-        val white = ContextCompat.getColor(requireContext(), R.color.white)
-        binding.campaignButton.setBackgroundResource(R.drawable.button_simple)
-        binding.campaignButton.setTextColor(white)
-        binding.publicationButton.setBackgroundResource(R.drawable.red_stroke_bt)
-        binding.publicationButton.setTextColor(redPrincipal)
-        binding.editTextDate.visibility = View.VISIBLE
-        binding.addressInputText.visibility = View.VISIBLE
-    }
-
-    private fun updateButtonStylesForPublication() {
-        val redPrincipal = ContextCompat.getColor(requireContext(), R.color.red_principal)
-        val white = ContextCompat.getColor(requireContext(), R.color.white)
-        binding.campaignButton.setBackgroundResource(R.drawable.red_stroke_bt)
-        binding.campaignButton.setTextColor(redPrincipal)
-        binding.publicationButton.setBackgroundResource(R.drawable.button_simple)
-        binding.publicationButton.setTextColor(white)
-        binding.editTextDate.visibility = View.INVISIBLE
-        binding.addressInputText.visibility = View.INVISIBLE
     }
 
     private val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

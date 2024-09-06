@@ -8,7 +8,7 @@ import androidx.fragment.app.replace
 import com.example.doa_app.R
 import com.example.doa_app.databinding.ActivityHomeInstitutionBinding
 import com.example.doa_app.presentation.ui.activity.fragments.AddPublicationFragment
-import com.example.doa_app.presentation.ui.activity.fragments.ListPublicationFragment
+import com.example.doa_app.presentation.ui.activity.fragments.ListCampaignFragment
 import com.example.doa_app.utils.SharedPreferences
 
 class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institution) {
@@ -35,7 +35,7 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
 
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<ListPublicationFragment>(R.id.fragment)
+            replace<ListCampaignFragment>(R.id.fragment)
         }
         addClick()
     }
@@ -54,7 +54,7 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace<ListPublicationFragment>(R.id.fragment)
+                replace<ListCampaignFragment>(R.id.fragment)
             }
         }
         btAddCreate.setOnClickListener {

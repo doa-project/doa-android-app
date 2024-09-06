@@ -4,8 +4,6 @@ import com.example.doa_app.data.model.mobile.CampaignMob
 import com.example.doa_app.data.model.api.CampaignAPI
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.api.Login
-import com.example.doa_app.data.model.mobile.PublicationMob
-import com.example.doa_app.data.model.api.PublicationAPI
 import com.example.doa_app.data.model.api.User
 import retrofit2.Response
 import retrofit2.http.Body
@@ -46,13 +44,5 @@ interface Service{
     suspend fun getAllCampaign(): Response<List<CampaignAPI>>
     @GET("campaign/get/{id_institution}")
     suspend fun getAllCampaignOfInstitution(@Path("id_institution") id: String): Response<List<CampaignMob>>
-
-    //PUBLICATION CRUD
-    @POST("publication/create")
-    suspend fun createPublication(@Body publication: PublicationAPI): Response<PublicationMob>
-    @GET("publication/get")
-    suspend fun getAllPublications(): Response<List<PublicationAPI>>
-    @GET("publication/get/{id_institution}")
-    suspend fun getAllPublicationsOfInstitution(@Path("id_institution") id: String): Response<List<PublicationMob>>
 
 }

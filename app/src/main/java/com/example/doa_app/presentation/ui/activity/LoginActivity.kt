@@ -49,11 +49,4 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.login(email, password)
         }
     }
-
-    override fun onDestroy() {
-//        sharedPreferences.clear()
-//        sharedPrefCurrentCampaign.clear()
-//        sharedPrefCurrentPublication.clear()
-        super.onDestroy()
-    }
 }

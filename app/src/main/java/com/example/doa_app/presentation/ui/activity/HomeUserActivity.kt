@@ -8,7 +8,6 @@ import androidx.fragment.app.replace
 import com.example.doa_app.R
 import com.example.doa_app.databinding.ActivityHomeUserBinding
 import com.example.doa_app.presentation.ui.activity.fragments.ListCampaignFragment
-import com.example.doa_app.presentation.ui.activity.fragments.ListPublicationFragment
 import com.example.doa_app.presentation.ui.activity.fragments.UserProfileFragment
 import com.example.doa_app.utils.SharedPreferences
 
@@ -17,7 +16,6 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
 
     private lateinit var btHome: ImageButton
     private lateinit var btHomeLogo: ImageButton
-    private lateinit var btViewCampaign: ImageButton
     private lateinit var btUser: ImageButton
 
     private val sharedPref = SharedPreferences(this, "login")
@@ -31,11 +29,10 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
 
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<ListPublicationFragment>(R.id.fragment)
+            replace<ListCampaignFragment>(R.id.fragment)
         }
         btHome = binding.btHome
         btHomeLogo = binding.btHomeLogo
-        btViewCampaign = binding.btViewCampaign
         btUser = binding.btUser
 
         addClick()
@@ -51,17 +48,6 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
     private fun addClick() {
         btHome.setOnClickListener {
             btHome.setImageResource(R.drawable.ihomes);
-            btViewCampaign.setImageResource(R.drawable.icampaignn);
-            btUser.setImageResource(R.drawable.iprofilen);
-
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                replace<ListPublicationFragment>(R.id.fragment)
-            }
-        }
-        btViewCampaign.setOnClickListener {
-            btHome.setImageResource(R.drawable.ihomen);
-            btViewCampaign.setImageResource(R.drawable.icampaigns);
             btUser.setImageResource(R.drawable.iprofilen);
 
             supportFragmentManager.commit {
@@ -71,7 +57,6 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
         }
         btUser.setOnClickListener {
             btHome.setImageResource(R.drawable.ihomen);
-            btViewCampaign.setImageResource(R.drawable.icampaignn);
             btUser.setImageResource(R.drawable.iprofiles);
 
             supportFragmentManager.commit {

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doa_app.data.model.api.CampaignAPI
 import com.example.doa_app.data.model.api.Institution
-import com.example.doa_app.data.model.api.PublicationAPI
 import com.example.doa_app.data.model.mobile.Image
 import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.utils.TreatmentApiObjects
@@ -29,8 +28,6 @@ class AddPublicationViewModel(
     val selectedImages: LiveData<List<Image>> get() = _selectedImages
 
     private var institution: Institution? = null
-    private var publicationType: Int = 1 // 1 for Publication, 2 for Campaign
-
     init {
         _selectedImages.value = emptyList()
         _loadingVisibility.value = View.GONE
@@ -38,10 +35,6 @@ class AddPublicationViewModel(
 
     fun setInstitution(institution: Institution) {
         this.institution = institution
-    }
-
-    fun setPublicationType(type: Int) {
-        publicationType = type
     }
 
     fun addImage(image: Image) {
@@ -62,11 +55,7 @@ class AddPublicationViewModel(
 
             viewModelScope.launch {
                 try {
-                    if (publicationType == 1) {
-                        createPublication(description)
-                    } else {
-                        createCampaign(description, address, date)
-                    }
+                    createCampaign(description, address, date)
                     _loadingVisibility.value = View.INVISIBLE
                 } catch (e: Exception) {
                     _loadingVisibility.value = View.INVISIBLE
@@ -78,32 +67,6 @@ class AddPublicationViewModel(
             }
         } ?: run {
             _errorMessage.value = "Institution is not set"
-        }
-    }
-
-    private suspend fun createPublication(description: String) {
-        val imageToString = selectedImages.value?.let { treatmentApiObjects.imageListToStringList(it) }!!.toList()
-        val publicationAPI = PublicationAPI(
-            null,
-            null,
-            institution?.institutionId!!.toString(),
-            null,
-            null,
-            description,
-            imageToString
-        )
-        Log.d("AddPublicationViewModel", "createPublication: $publicationAPI")
-        useCases.createPublication(publicationAPI).let {
-            if (it.isSuccessful) {
-                _loadingVisibility.value = View.INVISIBLE
-            }
-            else {
-                _loadingVisibility.value = View.INVISIBLE
-                _errorMessage.value = "Failed to create"
-                Log.d("AddPublicationViewModel", "Failed to create: ${it.errorBody()}")
-                Log.d("AddPublicationViewModel", "Failed to create: ${it.code()}")
-                Log.d("AddPublicationViewModel", "Failed to create: ${it.message()}")
-            }
         }
     }
 

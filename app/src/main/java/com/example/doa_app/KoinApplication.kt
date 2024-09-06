@@ -8,8 +8,6 @@ import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.presentation.view_model.AddPublicationViewModel
 import com.example.doa_app.presentation.view_model.ListCampaignOfInstitutionViewModel
 import com.example.doa_app.presentation.view_model.ListCampaignViewModel
-import com.example.doa_app.presentation.view_model.ListPublicationOfInstitutionViewModel
-import com.example.doa_app.presentation.view_model.ListPublicationViewModel
 import com.example.doa_app.presentation.view_model.LoginViewModel
 import com.example.doa_app.utils.SharedPreferences
 import com.example.doa_app.utils.TreatmentApiObjects
@@ -67,23 +65,7 @@ val appModule = module {
     }
 
     viewModel { (context: Context) ->
-        ListPublicationViewModel(
-            useCases = get(),
-            treatmentApiObjects = get(),
-            sharedPreferences = get { parametersOf(context) }
-        )
-    }
-
-    viewModel { (context: Context) ->
         ListCampaignOfInstitutionViewModel(
-            useCases = get(),
-            treatmentApiObjects = get(),
-            sharedPreferences = get { parametersOf(context) }
-        )
-    }
-
-    viewModel { (context: Context) ->
-        ListPublicationOfInstitutionViewModel(
             useCases = get(),
             treatmentApiObjects = get(),
             sharedPreferences = get { parametersOf(context) }
