@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doa_app.R
@@ -23,7 +22,6 @@ import com.example.doa_app.databinding.FragmentAddPublicationBinding
 import com.example.doa_app.presentation.ui.view.adapter.ListSelectedImagesAdapter
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
 import com.example.doa_app.presentation.view_model.AddPublicationViewModel
-import com.example.doa_app.utils.ImageUtils
 import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -31,12 +29,10 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
     private var _binding: FragmentAddPublicationBinding? = null
     private val binding get() = _binding!!
 
-    // ViewModel integration
     private val addPublicationViewModel = getViewModel<AddPublicationViewModel>()
 
-        private var listImageAdapter: ListSelectedImagesAdapter? = null
+    private var listImageAdapter: ListSelectedImagesAdapter? = null
     private val gson = Gson()
-    private val imageUtils = ImageUtils()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +64,6 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
 
         addPublicationViewModel.selectedImages.observe(viewLifecycleOwner) { images ->
             listImageAdapter?.imagesList = images.toMutableList()
-            listImageAdapter?.notifyDataSetChanged()
         }
 
         arguments?.let {
@@ -107,10 +102,9 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
                     if (i < 5) {
                         val imageUri = clipData.getItemAt(i).uri
                         val bitmap = loadBitmapFromUri(imageUri)
-                        val base64Image = imageUtils.bitmapToBase64(bitmap)
                         addPublicationViewModel.addImage(Image(
                             i.toString(),
-                            base64Image
+                            bitmap
                         ))
                     } else {
                         Toast.makeText(requireContext(), "Limite de 5 imagens", Toast.LENGTH_SHORT).show()
@@ -120,10 +114,9 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
             } ?: run {
                 result.data?.data?.let { uri ->
                     val bitmap = loadBitmapFromUri(uri)
-                    val base64Image = imageUtils.bitmapToBase64(bitmap)
                     addPublicationViewModel.addImage(Image(
                         "0",
-                        base64Image
+                        bitmap
                     ))
                 }
             }

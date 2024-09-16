@@ -39,7 +39,7 @@ class ListSelectedImagesAdapter : RecyclerView.Adapter<ListSelectedImagesAdapter
     override fun onBindViewHolder(holder: ListImageViewHolder, position: Int) {
         holder.binding.apply {
             val images = imagesList[position]
-            image.setImageBitmap(imageUtils.base64ToBitmap(images.image))
+            image.setImageBitmap(images.image)
         }
     }
 }

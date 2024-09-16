@@ -2,6 +2,7 @@ package com.example.doa_app
 
 import android.content.Context
 import com.example.doa_app.data.datasource.Service
+import com.example.doa_app.data.firebase.FirebaseStorageManager
 import com.example.doa_app.data.repository.RepositoryImpl
 import com.example.doa_app.domain.repository.Repository
 import com.example.doa_app.domain.usecase.UseCases
@@ -10,7 +11,6 @@ import com.example.doa_app.presentation.view_model.ListCampaignOfInstitutionView
 import com.example.doa_app.presentation.view_model.ListCampaignViewModel
 import com.example.doa_app.presentation.view_model.LoginViewModel
 import com.example.doa_app.utils.SharedPreferences
-import com.example.doa_app.utils.TreatmentApiObjects
 import com.example.doa_app.utils.gson
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.parameter.parametersOf
@@ -21,16 +21,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 val appModule = module {
     single<Service> {
         Retrofit.Builder()
-            .baseUrl("https://doa-api.onrender.com/")
+            .baseUrl("https://doa-api-1.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(Service::class.java)
     }
-    factory {
-        TreatmentApiObjects()
+    single {
+        FirebaseStorageManager()
     }
     single<Repository> {
-        RepositoryImpl(get())
+        RepositoryImpl(get(), get())
     }
 
     single {
@@ -51,15 +51,13 @@ val appModule = module {
 
     viewModel { (context: Context) ->
         AddPublicationViewModel(
-            useCases = get(),
-            treatmentApiObjects = get()
+            useCases = get()
         )
     }
 
     viewModel { (context: Context) ->
         ListCampaignViewModel(
             useCases = get(),
-            treatmentApiObjects = get(),
             sharedPreferences = get { parametersOf(context) }
         )
     }
@@ -67,7 +65,6 @@ val appModule = module {
     viewModel { (context: Context) ->
         ListCampaignOfInstitutionViewModel(
             useCases = get(),
-            treatmentApiObjects = get(),
             sharedPreferences = get { parametersOf(context) }
         )
     }

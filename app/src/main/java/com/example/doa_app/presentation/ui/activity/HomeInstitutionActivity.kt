@@ -19,9 +19,7 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
     private lateinit var btAddCreate: ImageButton
     private lateinit var btUser: ImageButton
 
-    private val sharedPref = SharedPreferences(this, "login")
-    private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
-    private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
+//    private val sharedPref = SharedPreferences(this, "doa_app_cache")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +36,6 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
             replace<ListCampaignFragment>(R.id.fragment)
         }
         addClick()
-    }
-
-    override fun onDestroy() {
-        sharedPref.clearAll()
-        sharedPrefCurrentCampaign.clearAll()
-        sharedPrefCurrentPublication.clearAll()
-        super.onDestroy()
     }
     private fun addClick() {
         btHome.setOnClickListener {

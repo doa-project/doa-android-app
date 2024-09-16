@@ -42,26 +42,5 @@ class InstitutionProfileFragment : Fragment(R.layout.fragment_institution_profil
         binding.institutionname.text = institutionLogged.name
         binding.descripition.text = institutionLogged.description
 
-
-        binding.publicationButton.setImageResource(R.drawable.ipublicationss)
-        binding.campaignButton.setImageResource(R.drawable.icampaignn)
-
-        binding.publicationButton.setOnClickListener {
-            binding.publicationButton.setImageResource(R.drawable.ipublicationss)
-            binding.campaignButton.setImageResource(R.drawable.icampaignn)
-
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentlist, ListPublicationFragment())
-                .commit()
-        }
-        binding.campaignButton.setOnClickListener {
-            binding.publicationButton.setImageResource(R.drawable.ipublicationsn)
-            binding.campaignButton.setImageResource(R.drawable.icampaigns)
-
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentlist, ListCampaignFragment())
-                .commit()
-        }
-
     }
 }

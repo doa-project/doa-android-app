@@ -1,5 +1,7 @@
 package com.example.doa_app.domain.repository;
 
+import android.content.Context
+import android.graphics.Bitmap
 import com.example.doa_app.data.model.api.CampaignAPI
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.api.Login
@@ -15,11 +17,14 @@ interface Repository {
     suspend fun login(login: Login): Response<Any>
     //
     suspend fun createInstitution(institution: Institution): Response<Institution>
-    suspend fun updateInstitution(id: String, institution: Institution): Response<Institution>
-    suspend fun deleteInstitution(id: String): Response<Institution>
-    suspend fun getInstitution(id: String): Response<Institution>
+//    suspend fun updateInstitution(id: String, institution: Institution): Response<Institution>
+//    suspend fun deleteInstitution(id: String): Response<Institution>
+//    suspend fun getInstitution(id: String): Response<Institution>
     //
     suspend fun createUser(user: User): Response<User>
-    suspend fun updateUser(id: String, user: User): Response<User>
-    suspend fun deleteUser(id: String): Response<User>
+//    suspend fun updateUser(id: String, user: User): Response<User>
+//    suspend fun deleteUser(id: String): Response<User>
+
+    suspend fun uploadImage(image: Bitmap): String?
+    suspend fun loadImage(url: String): Bitmap?
 }

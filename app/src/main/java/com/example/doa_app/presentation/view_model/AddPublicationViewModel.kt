@@ -10,12 +10,10 @@ import com.example.doa_app.data.model.api.CampaignAPI
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.mobile.Image
 import com.example.doa_app.domain.usecase.UseCases
-import com.example.doa_app.utils.TreatmentApiObjects
 import kotlinx.coroutines.launch
 
 class AddPublicationViewModel(
-    private val useCases: UseCases,
-    private val treatmentApiObjects: TreatmentApiObjects
+    private val useCases: UseCases
 ) : ViewModel() {
 
     private val _loadingVisibility = MutableLiveData<Int>()
@@ -71,7 +69,7 @@ class AddPublicationViewModel(
     }
 
     private suspend fun createCampaign(description: String, local: String, date: String) {
-        val imageToString = selectedImages.value?.let { treatmentApiObjects.imageListToStringList(it) }!!.toList()
+        val listOfUrls = uploadImages()
         val campaignAPI = CampaignAPI(
             null,
             null,
@@ -79,7 +77,7 @@ class AddPublicationViewModel(
             null,
             null,
             description,
-            imageToString,
+            listOfUrls,
             local,
             date
         )
@@ -96,5 +94,31 @@ class AddPublicationViewModel(
                 Log.d("AddPublicationViewModel", "Failed to create: ${it.message()}")
             }
         }
+    }
+    private suspend fun uploadImages(): MutableList<String> {
+        val listOfUrlImages = mutableListOf<String>()
+        if(_selectedImages.value.isNullOrEmpty()) {
+            return listOfUrlImages
+        }
+        selectedImages.value?.let {
+            for (image in it) {
+                try {
+                    val url = useCases.uploadImage(
+                        image.image
+                    )
+                    if (url != null) {
+                        listOfUrlImages.add(url)
+                    } else {
+                        _errorMessage.value = "Failed to upload image"
+                    }
+                } catch (e: Exception) {
+                    _errorMessage.value = "Failed to upload image: ${e.message}"
+                    Log.d("AddPublicationViewModel", "Failed to upload image: ${e.message}")
+                    Log.d("AddPublicationViewModel", "Failed to upload image: ${e.stackTrace}")
+                    Log.d("AddPublicationViewModel", "Failed to upload image: ${e.cause}")
+                }
+            }
+        }
+        return listOfUrlImages
     }
 }
