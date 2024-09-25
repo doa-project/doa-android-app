@@ -21,9 +21,6 @@
             android:name=".presentation.ui.activity.fragments.ListCampaignFragment"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.activity.fragments.ListPublicationFragment"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.activity.fragments.UserProfileFragment"
             android:exported="false" />
         <activity

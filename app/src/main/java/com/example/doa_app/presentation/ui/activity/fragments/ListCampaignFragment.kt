@@ -13,17 +13,16 @@ import com.example.doa_app.databinding.FragmentListCampaignBinding
 import com.example.doa_app.presentation.ui.view.adapter.ListCampaignAdapter
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
 import com.example.doa_app.presentation.view_model.ListCampaignViewModel
-import com.example.doa_app.utils.SharedPreferences
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListCampaignFragment : Fragment(R.layout.fragment_list_campaign) {
 
     private var _binding: FragmentListCampaignBinding? = null
-    private val sharedPreferences = SharedPreferences(requireContext(), "SharedPreferences")
     private val binding get() = _binding!!
     private var listCampaignAdapter: ListCampaignAdapter? = null
 
-    private val listCampaignViewModel = getViewModel<ListCampaignViewModel>()
+    private val listCampaignViewModel: ListCampaignViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -16,7 +16,6 @@ class InstitutionProfileFragment : Fragment(R.layout.fragment_institution_profil
     private val binding get() = _binding!!
     private lateinit var institutionLogged: Institution
     private val utils = ImageUtils()
-//    private val institutionUseCase = InstitutionUseCase(InstitutionRepositoryImpl(RetrofitInstance.service))
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

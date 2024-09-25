@@ -14,58 +14,49 @@ import com.example.doa_app.utils.SharedPreferences
 class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institution) {
     private lateinit var binding: ActivityHomeInstitutionBinding
 
-    private lateinit var btHome: ImageButton
-    private lateinit var btHomeLogo: ImageButton
-    private lateinit var btAddCreate: ImageButton
-    private lateinit var btUser: ImageButton
-
-//    private val sharedPref = SharedPreferences(this, "doa_app_cache")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeInstitutionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        btHome = binding.btHome
-        btHomeLogo = binding.btHomeLogo
-        btAddCreate = binding.btAddPublication
-        btUser = binding.btUser
-
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<ListCampaignFragment>(R.id.fragment)
-        }
-        addClick()
-    }
-    private fun addClick() {
-        btHome.setOnClickListener {
-            btHome.setImageResource(R.drawable.ihomes);
-            btAddCreate.setImageResource(R.drawable.icreaten);
-            btUser.setImageResource(R.drawable.iprofilen);
+        binding.btHome.setOnClickListener {
+            binding.btHome.setImageResource(R.drawable.ihomes);
+            binding.btAddPublication.setImageResource(R.drawable.icreaten);
+            binding.btUser.setImageResource(R.drawable.iprofilen);
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace<ListCampaignFragment>(R.id.fragment)
             }
         }
-        btAddCreate.setOnClickListener {
-            btHome.setImageResource(R.drawable.ihomen);
-            btAddCreate.setImageResource(R.drawable.icreates);
-            btUser.setImageResource(R.drawable.iprofilen);
+        binding.btAddPublication.setOnClickListener {
+            binding.btHome.setImageResource(R.drawable.ihomen);
+            binding.btAddPublication.setImageResource(R.drawable.icreates);
+            binding.btUser.setImageResource(R.drawable.iprofilen);
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace<AddPublicationFragment>(R.id.fragment)
             }
         }
-        btUser.setOnClickListener {
-            btHome.setImageResource(R.drawable.ihomen);
-            btAddCreate.setImageResource(R.drawable.icreaten);
-            btUser.setImageResource(R.drawable.iprofiles);
+        binding.btUser.setOnClickListener {
+            binding.btHome.setImageResource(R.drawable.ihomen);
+            binding.btAddPublication.setImageResource(R.drawable.icreaten);
+            binding.btUser.setImageResource(R.drawable.iprofiles);
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace<AddPublicationFragment>(R.id.fragment)
+            }
+        }
+        binding.btHomeLogo.setOnClickListener {
+            binding.btHome.setImageResource(R.drawable.ihomes);
+            binding.btAddPublication.setImageResource(R.drawable.icreaten);
+            binding.btUser.setImageResource(R.drawable.iprofilen);
+
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<ListCampaignFragment>(R.id.fragment)
             }
         }
     }

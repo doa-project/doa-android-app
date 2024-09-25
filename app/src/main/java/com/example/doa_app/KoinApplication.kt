@@ -37,35 +37,40 @@ val appModule = module {
         UseCases(get())
     }
 
-    factory {
-            (context: Context) ->
-        SharedPreferences(context, "doa_app_cache")
+    single {
+        SharedPreferences(get(), "doa_app_cache")
     }
 
-    viewModel { (context: Context) ->
-        LoginViewModel(
-            useCases = get(),
-            sharedPreferences = get { parametersOf(context) }
+    single {
+        get<Context>().getSharedPreferences(
+        "doa_app_cache", Context.MODE_PRIVATE
         )
     }
 
-    viewModel { (context: Context) ->
+    viewModel {
         AddPublicationViewModel(
             useCases = get()
         )
     }
 
-    viewModel { (context: Context) ->
-        ListCampaignViewModel(
+    viewModel {
+        LoginViewModel(
             useCases = get(),
-            sharedPreferences = get { parametersOf(context) }
+            sharedPreferences = get()
         )
     }
 
-    viewModel { (context: Context) ->
+    viewModel {
+        ListCampaignViewModel(
+            useCases = get(),
+            sharedPreferences = get()
+        )
+    }
+
+    viewModel {
         ListCampaignOfInstitutionViewModel(
             useCases = get(),
-            sharedPreferences = get { parametersOf(context) }
+            sharedPreferences = get()
         )
     }
 }

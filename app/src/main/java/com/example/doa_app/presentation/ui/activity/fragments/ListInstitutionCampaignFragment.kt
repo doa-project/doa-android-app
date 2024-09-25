@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.doa_app.R
 import com.example.doa_app.presentation.view_model.ListCampaignOfInstitutionViewModel
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListInstitutionCampaignFragment : Fragment() {
 
-    private val listCampaignOfInstitutionViewModel = getViewModel<ListCampaignOfInstitutionViewModel>()
+    private val listCampaignOfInstitutionViewModel: ListCampaignOfInstitutionViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

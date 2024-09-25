@@ -23,13 +23,13 @@ import com.example.doa_app.presentation.ui.view.adapter.ListSelectedImagesAdapte
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
 import com.example.doa_app.presentation.view_model.AddPublicationViewModel
 import com.google.gson.Gson
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
     private var _binding: FragmentAddPublicationBinding? = null
     private val binding get() = _binding!!
 
-    private val addPublicationViewModel = getViewModel<AddPublicationViewModel>()
+    private val addPublicationViewModel: AddPublicationViewModel by viewModel()
 
     private var listImageAdapter: ListSelectedImagesAdapter? = null
     private val gson = Gson()
