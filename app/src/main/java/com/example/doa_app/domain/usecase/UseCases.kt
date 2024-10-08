@@ -15,8 +15,8 @@ class UseCases(
 ) {
     //Methods for CRUD of Campaign
     suspend fun getAllCampaign(): Response<List<CampaignAPI>> = repository.getAllCampaign()
-    suspend fun getAllCampaignOfInstitution(id: String): Response<List<CampaignMob>> = repository.getAllCampaignOfInstitution(id)
-    suspend fun createCampaign(campaign: CampaignAPI): Response<CampaignMob> = repository.createCampaign(campaign)
+    suspend fun getAllCampaignOfInstitution(id: String): Response<List<CampaignAPI>> = repository.getAllCampaignOfInstitution(id)
+    suspend fun createCampaign(campaign: CampaignAPI): Response<CampaignAPI> = repository.createCampaign(campaign)
     //
     suspend fun login(login: Login): Response<Any> = repository.login(login)
     //

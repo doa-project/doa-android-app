@@ -11,8 +11,8 @@ import retrofit2.Response
 interface Repository {
     //
     suspend fun getAllCampaign(): Response<List<CampaignAPI>>
-    suspend fun getAllCampaignOfInstitution(id: String): Response<List<CampaignMob>>
-    suspend fun createCampaign(campaign: CampaignAPI): Response<CampaignMob>
+    suspend fun getAllCampaignOfInstitution(id: String): Response<List<CampaignAPI>>
+    suspend fun createCampaign(campaign: CampaignAPI): Response<CampaignAPI>
     //
     suspend fun login(login: Login): Response<Any>
     //

@@ -39,10 +39,10 @@ interface Service{
 
     //CAMPAIN CRUD
     @POST("campaign/create")
-    suspend fun createCampaign(@Body campaign: CampaignAPI): Response<CampaignMob>
+    suspend fun createCampaign(@Body campaign: CampaignAPI): Response<CampaignAPI>
     @GET("campaign/get")
     suspend fun getAllCampaign(): Response<List<CampaignAPI>>
     @GET("campaign/get/{id_institution}")
-    suspend fun getAllCampaignOfInstitution(@Path("id_institution") id: String): Response<List<CampaignMob>>
+    suspend fun getAllCampaignOfInstitution(@Path("id_institution") id: String): Response<List<CampaignAPI>>
 
 }

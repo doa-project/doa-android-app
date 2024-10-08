@@ -16,13 +16,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doa_app.R
-import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.mobile.Image
 import com.example.doa_app.databinding.FragmentAddPublicationBinding
 import com.example.doa_app.presentation.ui.view.adapter.ListSelectedImagesAdapter
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
 import com.example.doa_app.presentation.view_model.AddPublicationViewModel
-import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
@@ -32,7 +30,6 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
     private val addPublicationViewModel: AddPublicationViewModel by viewModel()
 
     private var listImageAdapter: ListSelectedImagesAdapter? = null
-    private val gson = Gson()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,13 +63,8 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
             listImageAdapter?.imagesList = images.toMutableList()
         }
 
-        arguments?.let {
-            val data = it.getString("loggedUser")
-            val institution = gson.fromJson(data, Institution::class.java)
-            addPublicationViewModel.setInstitution(institution)
-        }
+        addPublicationViewModel.getInstitution()
 
-        // Button clicks
         binding.galeryButton.setOnClickListener {
             openGallery()
             setupListImageRecyclerView()

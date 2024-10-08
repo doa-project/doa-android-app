@@ -1,5 +1,6 @@
 package com.example.doa_app.presentation.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,20 +13,12 @@ import org.koin.core.parameter.parametersOf
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
-//    private lateinit var sharedPreferences: SharedPreferences
-//    private lateinit var sharedPrefCurrentCampaign: SharedPreferences
-//    private lateinit var sharedPrefCurrentPublication: SharedPreferences
-
     private val loginViewModel: LoginViewModel by viewModel{parametersOf(this)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        sharedPreferences = SharedPreferences(this, "login")
-//        sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
-//        sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
 
         loginViewModel.loadingVisibility.observe(this) {
             binding.progressBar4.visibility = it

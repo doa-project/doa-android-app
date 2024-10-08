@@ -13,15 +13,6 @@ import com.example.doa_app.utils.SharedPreferences
 
 class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
     private lateinit var binding: ActivityHomeUserBinding
-
-    private lateinit var btHome: ImageButton
-    private lateinit var btHomeLogo: ImageButton
-    private lateinit var btUser: ImageButton
-
-    private val sharedPref = SharedPreferences(this, "login")
-    private val sharedPrefCurrentCampaign = SharedPreferences(this, "currentCampaign")
-    private val sharedPrefCurrentPublication = SharedPreferences(this, "currentPublication")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeUserBinding.inflate(layoutInflater)
@@ -31,37 +22,23 @@ class HomeUserActivity : AppCompatActivity(R.layout.activity_home_user) {
             setReorderingAllowed(true)
             replace<ListCampaignFragment>(R.id.fragment)
         }
-        btHome = binding.btHome
-        btHomeLogo = binding.btHomeLogo
-        btUser = binding.btUser
 
-        addClick()
-
-    }
-    override fun onDestroy() {
-        sharedPref.clearAll()
-        sharedPrefCurrentCampaign.clearAll()
-        sharedPrefCurrentPublication.clearAll()
-        super.onDestroy()
-    }
-
-    private fun addClick() {
-        btHome.setOnClickListener {
-            btHome.setImageResource(R.drawable.ihomes);
-            btUser.setImageResource(R.drawable.iprofilen);
+        binding.btHome.setOnClickListener {
+            binding.btHome.setImageResource(R.drawable.ihomes);
+            binding.btUser.setImageResource(R.drawable.iprofilen);
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace<ListCampaignFragment>(R.id.fragment)
+                replace<ListCampaignFragment>(R.id.fragment, "ListCampaignFragment")
             }
         }
-        btUser.setOnClickListener {
-            btHome.setImageResource(R.drawable.ihomen);
-            btUser.setImageResource(R.drawable.iprofiles);
+        binding.btUser.setOnClickListener {
+            binding.btHome.setImageResource(R.drawable.ihomen);
+            binding.btUser.setImageResource(R.drawable.iprofiles);
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace<UserProfileFragment>(R.id.fragment)
+                replace<UserProfileFragment>(R.id.fragment, "UserProfileFragment")
             }
         }
     }

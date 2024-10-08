@@ -10,10 +10,16 @@ import com.example.doa_app.data.model.api.CampaignAPI
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.mobile.Image
 import com.example.doa_app.domain.usecase.UseCases
+import com.example.doa_app.utils.SharedPreferences
+import com.example.doa_app.utils.gson
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class AddPublicationViewModel(
-    private val useCases: UseCases
+    private val useCases: UseCases,
+    private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
     private val _loadingVisibility = MutableLiveData<Int>()
@@ -31,8 +37,10 @@ class AddPublicationViewModel(
         _loadingVisibility.value = View.GONE
     }
 
-    fun setInstitution(institution: Institution) {
-        this.institution = institution
+    fun getInstitution() {
+        sharedPreferences.getString("loggedInstitution")?.let {
+            this.institution = gson.fromJson(it, Institution::class.java)
+        }
     }
 
     fun addImage(image: Image) {
@@ -43,14 +51,12 @@ class AddPublicationViewModel(
     }
 
     fun createPublicationOrCampaign(description: String, address: String, date: String) {
-        if (description.isBlank()) {
-            _errorMessage.value = "Description cannot be empty"
+        if (description.isBlank() || address.isBlank() || date.isBlank()) {
+            _errorMessage.value = "All fields are required"
             return
         }
-
         institution?.let {
             _loadingVisibility.value = View.VISIBLE
-
             viewModelScope.launch {
                 try {
                     createCampaign(description, address, date)
@@ -78,8 +84,9 @@ class AddPublicationViewModel(
             null,
             description,
             listOfUrls,
-            local,
-            date
+            date,
+            local
+
         )
         Log.d("AddPublicationViewModel", "createCampaign: $campaignAPI")
         useCases.createCampaign(campaignAPI).let {
@@ -91,34 +98,43 @@ class AddPublicationViewModel(
                 _errorMessage.value = "Failed to create"
                 Log.d("AddPublicationViewModel", "Failed to create: ${it.errorBody()}")
                 Log.d("AddPublicationViewModel", "Failed to create: ${it.code()}")
+                Log.d("AddPublicationViewModel", "Failed to create: ${it.body()}")
                 Log.d("AddPublicationViewModel", "Failed to create: ${it.message()}")
             }
         }
     }
+
     private suspend fun uploadImages(): MutableList<String> {
         val listOfUrlImages = mutableListOf<String>()
-        if(_selectedImages.value.isNullOrEmpty()) {
-            return listOfUrlImages
-        }
-        selectedImages.value?.let {
-            for (image in it) {
-                try {
-                    val url = useCases.uploadImage(
-                        image.image
-                    )
-                    if (url != null) {
-                        listOfUrlImages.add(url)
-                    } else {
-                        _errorMessage.value = "Failed to upload image"
+
+        val images = _selectedImages.value ?: return listOfUrlImages
+
+        coroutineScope {
+            images.map { image ->
+                async {
+                    try {
+                        val url = useCases.uploadImage(image.image)
+                        if (url != null) {
+                            listOfUrlImages.add(url)
+                        } else {
+                            logError("Failed to upload image")
+                        }
+                    } catch (e: Exception) {
+                        logError("Failed to upload image: ${e.message}", e)
                     }
-                } catch (e: Exception) {
-                    _errorMessage.value = "Failed to upload image: ${e.message}"
-                    Log.d("AddPublicationViewModel", "Failed to upload image: ${e.message}")
-                    Log.d("AddPublicationViewModel", "Failed to upload image: ${e.stackTrace}")
-                    Log.d("AddPublicationViewModel", "Failed to upload image: ${e.cause}")
                 }
-            }
+            }.awaitAll()
         }
         return listOfUrlImages
     }
+    private fun logError(message: String, exception: Exception? = null) {
+        _errorMessage.value = message
+        Log.d("AddPublicationViewModel", message)
+        exception?.let {
+            Log.d("AddPublicationViewModel", "Exception: ${it.stackTrace}")
+            Log.d("AddPublicationViewModel", ": ${it.message}")
+            Log.d("AddPublicationViewModel", "Cause: ${it.cause}")
+        }
+    }
+
 }

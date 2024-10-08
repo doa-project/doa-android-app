@@ -37,7 +37,6 @@ class InstitutionProfileFragment : Fragment(R.layout.fragment_institution_profil
             institutionLogged = dataJson
 
         }
-//        binding.profileimage.setImageBitmap()
         binding.institutionname.text = institutionLogged.name
         binding.descripition.text = institutionLogged.description
 

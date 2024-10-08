@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doa_app.R
+import com.example.doa_app.data.firebase.FirebaseStorageManager
 import com.example.doa_app.data.model.mobile.CampaignMob
 import com.example.doa_app.databinding.CampaignBinding
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
 import com.example.doa_app.utils.ImageUtils
 
 class ListCampaignAdapter: RecyclerView.Adapter<ListCampaignAdapter.ListCampaignViewHolder>()  {
-    private val imageUtils = ImageUtils()
     inner class ListCampaignViewHolder(val binding: CampaignBinding) : RecyclerView.ViewHolder(binding.root)
 
         private val diffCallback = object : DiffUtil.ItemCallback<CampaignMob>() {
@@ -46,7 +46,6 @@ class ListCampaignAdapter: RecyclerView.Adapter<ListCampaignAdapter.ListCampaign
             holder.binding.apply {
                 val campaigns = campaignsList[position]
                 institutionName.text = campaigns.institutionName
-                institutionImage.setImageBitmap(imageUtils.base64ToBitmap((campaigns.institutionPhoto ?: "")))
                 description.text = campaigns.description
                 local.text = campaigns.local
                 date.text = campaigns.endDate
@@ -63,14 +62,6 @@ class ListCampaignAdapter: RecyclerView.Adapter<ListCampaignAdapter.ListCampaign
                         LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
                 }
                 setupListImageRecyclerView()
-
-
-//                institutionImage.setOnClickListener {
-//                    listener.onCampaignClick(campaigns)
-//                }
-//                institutionName.setOnClickListener {
-//                    listener.onCampaignClick(campaigns)
-//                }
             }
         }
     }

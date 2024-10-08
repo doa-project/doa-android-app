@@ -21,11 +21,11 @@ class RepositoryImpl(
         return service.getAllCampaign()
     }
 
-    override suspend fun getAllCampaignOfInstitution(id: String): Response<List<CampaignMob>> {
+    override suspend fun getAllCampaignOfInstitution(id: String): Response<List<CampaignAPI>> {
         return service.getAllCampaignOfInstitution(id)
     }
 
-    override suspend fun createCampaign(campaign: CampaignAPI): Response<CampaignMob> {
+    override suspend fun createCampaign(campaign: CampaignAPI): Response<CampaignAPI> {
         return service.createCampaign(campaign)
     }
     override suspend fun login(login: Login): Response<Any> {
