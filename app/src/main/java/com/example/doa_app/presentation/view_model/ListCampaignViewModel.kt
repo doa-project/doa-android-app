@@ -30,7 +30,7 @@ class ListCampaignViewModel(
             try {
                 val response = useCases.getAllCampaign().body()
                 if (response.isNullOrEmpty()) {
-                    errorMessage.value = "No campaigns found!"
+                    errorMessage.value = "Sem campanhas"
                     Log.e("ListCampaignViewModel", "No publications found")
                 } else {
                     Log.d("ListCampaignViewModel", "Response: $response")
@@ -41,16 +41,16 @@ class ListCampaignViewModel(
                     "ListCampaignViewModel",
                     "IOException, you might not have internet connection: ${e.message}"
                 )
-                errorMessage.value = "You might not have internet connection"
+                errorMessage.value = "Tente novamente em dois minutos"
             } catch (e: TimeoutException) {
                 Log.e(
                     "ListCampaignViewModel",
                     "TimeoutException, request timed out: ${e.message}"
                 )
-                errorMessage.value = "Request timed out"
+                errorMessage.value = "Tente novamente em dois minutos"
             } catch (e: Exception) {
                 Log.e("ListCampaignViewModel", "Exception, an error occurred: ${e.message}")
-                errorMessage.value = "An error occurred"
+                errorMessage.value = "Algum erro ocorreu"
             } finally {
                 loading.value = false
             }

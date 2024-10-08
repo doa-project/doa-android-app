@@ -52,7 +52,7 @@ class AddPublicationViewModel(
 
     fun createPublicationOrCampaign(description: String, address: String, date: String) {
         if (description.isBlank() || address.isBlank() || date.isBlank()) {
-            _errorMessage.value = "All fields are required"
+            _errorMessage.value = "Preencha os campos"
             return
         }
         institution?.let {
@@ -63,14 +63,14 @@ class AddPublicationViewModel(
                     _loadingVisibility.value = View.INVISIBLE
                 } catch (e: Exception) {
                     _loadingVisibility.value = View.INVISIBLE
-                    _errorMessage.value = "Failed to create: ${e.message}"
+                    _errorMessage.value = "Erro ao criar campanha"
                     Log.d("AddPublicationViewModel", "Failed to create: ${e.message}")
                     Log.d("AddPublicationViewModel", "Failed to create: ${e.stackTrace}")
                     Log.d("AddPublicationViewModel", "Failed to create: ${e.cause}")
                 }
             }
         } ?: run {
-            _errorMessage.value = "Institution is not set"
+            _errorMessage.value = "Login não efetuado"
         }
     }
 
@@ -95,7 +95,7 @@ class AddPublicationViewModel(
             }
             else {
                 _loadingVisibility.value = View.INVISIBLE
-                _errorMessage.value = "Failed to create"
+                _errorMessage.value = "Erro ao criar campanha"
                 Log.d("AddPublicationViewModel", "Failed to create: ${it.errorBody()}")
                 Log.d("AddPublicationViewModel", "Failed to create: ${it.code()}")
                 Log.d("AddPublicationViewModel", "Failed to create: ${it.body()}")

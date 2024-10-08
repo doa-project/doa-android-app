@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doa_app.data.model.api.Institution
 import com.example.doa_app.data.model.api.Login
+import com.example.doa_app.data.model.api.User
 import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.utils.SharedPreferences
 import com.google.gson.Gson
@@ -34,7 +35,7 @@ class LoginViewModel(
                 showLoading()
                 response = useCases.login(Login(email = email, password = password))
                 if (response.body() == null) {
-                    errorMessage.value = "Invalid email or password"
+                    errorMessage.value = "Email ou senha inválidos"
                     hideLoading()
                     return@launch
                 } else {
@@ -45,6 +46,13 @@ class LoginViewModel(
                         Log.d("Login", "Institution onCreate: $response")
                         val intent: Intent
                         if (institution.institutionId != 0) {
+                            val user = User(
+                                institution.id,
+                                institution.institutionId,
+                                institution.name,
+                                institution.email
+                            )
+                            saveUserLocalStorage(responseJson)
                             saveInstitutionLocalStorage(responseJson)
                             intent = Intent(Intent.ACTION_MAIN).apply {
                                 setClassName(
@@ -65,34 +73,34 @@ class LoginViewModel(
                         hideLoading()
                         return@launch
                     } catch (e: Exception) {
-                        errorMessage.value = "An error occurred"
+                        errorMessage.value = "Um erro aconteceu"
                         hideLoading()
                         return@launch
                     }
                 }
             } catch (e: NotFoundException) {
                 Log.e(ContentValues.TAG, "NotFoundException, invalid email or password")
-                errorMessage.value = "Invalid email or password"
+                errorMessage.value = "Email ou senha inválidos"
                 hideLoading()
                 return@launch
             } catch (e: TimeoutException) {
                 Log.e(ContentValues.TAG, "TimeoutException, request timed out")
-                errorMessage.value = "Request timed out, please try again"
+                errorMessage.value = "Tente de novo em 2 minutos"
                 hideLoading()
                 return@launch
             } catch (e: IOException) {
                 Log.e(ContentValues.TAG, "IOException, you might not have internet connection")
-                errorMessage.value = "You might not have internet connection"
+                errorMessage.value = "Tente de novo em 2 minutos"
                 hideLoading()
                 return@launch
             } catch (e: InternalError) {
                 Log.e(ContentValues.TAG, "InternalError, an error occurred")
-                errorMessage.value = "An error occurred"
+                errorMessage.value = "Algum erro ocorreu"
                 hideLoading()
                 return@launch
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "Generic Exception, an error occurred")
-                errorMessage.value = "An error occurred"
+                errorMessage.value = "Algum erro ocorreu"
                 hideLoading()
                 return@launch
             }
