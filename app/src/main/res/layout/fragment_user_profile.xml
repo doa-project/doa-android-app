@@ -11,23 +11,25 @@
         android:id="@+id/noprofileimage"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/doauser"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/style_profile_image"
+        />
 
     <TextView
         android:id="@+id/emailuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/publicsans_medium"
         android:textColor="@color/black_text_emphasis"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/noprofileimage"
-        app:layout_constraintStart_toEndOf="@+id/noprofileimage"
-        app:layout_constraintTop_toTopOf="@+id/noprofileimage" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noprofileimage" />
 
     <Button
         android:id="@+id/exitButton"

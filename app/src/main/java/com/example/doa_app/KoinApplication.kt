@@ -9,6 +9,7 @@ import com.example.doa_app.domain.usecase.UseCases
 import com.example.doa_app.presentation.view_model.AddPublicationViewModel
 import com.example.doa_app.presentation.view_model.ListCampaignViewModel
 import com.example.doa_app.presentation.view_model.LoginViewModel
+import com.example.doa_app.presentation.view_model.UserProfileViewModel
 import com.example.doa_app.utils.ImageUtils
 import com.example.doa_app.utils.SharedPreferences
 import com.example.doa_app.utils.gson
@@ -65,6 +66,11 @@ val appModule = module {
     viewModel {
         ListCampaignViewModel(
             useCases = get()
+        )
+    }
+    viewModel {
+        UserProfileViewModel(
+            sharedPreferences = get()
         )
     }
 }

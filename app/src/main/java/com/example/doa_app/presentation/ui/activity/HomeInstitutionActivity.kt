@@ -21,10 +21,13 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
         binding = ActivityHomeInstitutionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-            binding.btHome.setImageResource(R.drawable.ihomes)
-            binding.btAddPublication.setImageResource(R.drawable.icreaten)
-            binding.btUser.setImageResource(R.drawable.iprofilen)
-
+        binding.btHome.setImageResource(R.drawable.ihomes)
+        binding.btAddPublication.setImageResource(R.drawable.icreaten)
+        binding.btUser.setImageResource(R.drawable.iprofilen)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<ListCampaignFragment>(R.id.fragment)
+        }
 
         binding.btHome.setOnClickListener {
             binding.btHome.setImageResource(R.drawable.ihomes)

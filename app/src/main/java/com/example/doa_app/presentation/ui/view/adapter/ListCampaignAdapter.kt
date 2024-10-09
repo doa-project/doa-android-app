@@ -6,12 +6,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.doa_app.R
-import com.example.doa_app.data.firebase.FirebaseStorageManager
 import com.example.doa_app.data.model.mobile.CampaignMob
 import com.example.doa_app.databinding.CampaignBinding
 import com.example.doa_app.presentation.ui.view.style.SpacingOnSide
-import com.example.doa_app.utils.ImageUtils
 
 class ListCampaignAdapter: RecyclerView.Adapter<ListCampaignAdapter.ListCampaignViewHolder>()  {
     inner class ListCampaignViewHolder(val binding: CampaignBinding) : RecyclerView.ViewHolder(binding.root)
@@ -55,7 +52,7 @@ class ListCampaignAdapter: RecyclerView.Adapter<ListCampaignAdapter.ListCampaign
                     adapter = listImageAdapter
                     addItemDecoration(
                         SpacingOnSide(
-                            resources.getDimension(R.dimen.recycler_view_item_space).toInt()
+                            32
                         )
                     )
                     layoutManager =
