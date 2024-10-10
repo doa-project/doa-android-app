@@ -42,7 +42,7 @@
                 android:gravity="start|top"
                 android:hint="@string/o_que_voc_quer_contar_ao_mundo"
                 android:inputType="textMultiLine"
-                android:maxLength="50"
+                android:maxLength="500"
                 android:padding="16dp"
                 android:textColor="@color/grey_text"
                 android:textColorHint="@color/grey_disabled"
