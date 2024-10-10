@@ -46,12 +46,6 @@ class LoginViewModel(
                         Log.d("Login", "Institution onCreate: $response")
                         val intent: Intent
                         if (institution.institutionId != 0) {
-                            val user = User(
-                                institution.id,
-                                institution.institutionId,
-                                institution.name,
-                                institution.email
-                            )
                             saveUserLocalStorage(responseJson)
                             saveInstitutionLocalStorage(responseJson)
                             intent = Intent(Intent.ACTION_MAIN).apply {

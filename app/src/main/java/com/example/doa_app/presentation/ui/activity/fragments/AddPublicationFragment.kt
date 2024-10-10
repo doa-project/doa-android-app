@@ -76,6 +76,17 @@ class AddPublicationFragment : Fragment(R.layout.fragment_add_publication) {
                 address = binding.addressInputText.text.toString(),
                 date = binding.editTextDate.text.toString()
             )
+
+            addPublicationViewModel.isSuccess.observe(viewLifecycleOwner) {
+                if (it) {
+                    Toast.makeText(requireContext(), "Publicação criada com sucesso", Toast.LENGTH_SHORT).show()
+                    binding.editTextTextMultiLine.setText("")
+                    binding.addressInputText.setText("")
+                    binding.editTextDate.setText("")
+
+                    listImageAdapter?.imagesList = mutableListOf()
+                }
+            }
         }
     }
 

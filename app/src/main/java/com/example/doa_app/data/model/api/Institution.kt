@@ -8,5 +8,5 @@ data class Institution(
     val description: String,
     val local: String,
     val phone: String,
-    val photo: String?
+    val photo: String
 )

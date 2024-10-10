@@ -67,7 +67,7 @@ class ListCampaignFragment : Fragment(R.layout.fragment_list_campaign) {
         listCampaignAdapter = ListCampaignAdapter()
         listCampaignAdapter!!.campaignsList = campaignMobList.toMutableList()
         adapter = listCampaignAdapter
-        addItemDecoration(SpacingOnSide(resources.getDimension(R.dimen.recycler_view_item_space).toInt()))
+        addItemDecoration(SpacingOnSide(16))
         layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
     }
 

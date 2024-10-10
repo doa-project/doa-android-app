@@ -43,7 +43,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             if (user != null) {
                 Glide.with(requireContext())
                     .load(user.photo)
+                    .circleCrop()
                     .into(binding.noprofileimage)
+
+                binding.nameuser.text = user.name
                 binding.emailuser.text = user.email
             }
         }

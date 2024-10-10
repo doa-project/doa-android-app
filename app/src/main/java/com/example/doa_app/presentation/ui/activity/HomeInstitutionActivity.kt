@@ -29,6 +29,16 @@ class HomeInstitutionActivity : AppCompatActivity(R.layout.activity_home_institu
             replace<ListCampaignFragment>(R.id.fragment)
         }
 
+        binding.btHomeLogo.setOnClickListener {
+            binding.btHome.setImageResource(R.drawable.ihomes)
+            binding.btAddPublication.setImageResource(R.drawable.icreaten)
+            binding.btUser.setImageResource(R.drawable.iprofilen)
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<ListCampaignFragment>(R.id.fragment)
+            }
+        }
+
         binding.btHome.setOnClickListener {
             binding.btHome.setImageResource(R.drawable.ihomes)
             binding.btAddPublication.setImageResource(R.drawable.icreaten)

@@ -31,6 +31,9 @@ class AddPublicationViewModel(
     private val _selectedImages = MutableLiveData<List<Image>>()
     val selectedImages: LiveData<List<Image>> get() = _selectedImages
 
+    private val _isSuccess = MutableLiveData<Boolean>()
+    val isSuccess: LiveData<Boolean> get() = _isSuccess
+
     private var institution: Institution? = null
     init {
         _selectedImages.value = emptyList()
@@ -59,7 +62,9 @@ class AddPublicationViewModel(
             _loadingVisibility.value = View.VISIBLE
             viewModelScope.launch {
                 try {
-                    createCampaign(description, address, date)
+                    createCampaign(description, address, date).let {
+                        _isSuccess.value = true
+                    }
                     _loadingVisibility.value = View.INVISIBLE
                 } catch (e: Exception) {
                     _loadingVisibility.value = View.INVISIBLE
@@ -81,7 +86,7 @@ class AddPublicationViewModel(
             null,
             institution?.institutionId!!.toString(),
             null,
-            null,
+            institution?.photo,
             description,
             listOfUrls,
             date,
